@@ -1,0 +1,193 @@
+[
+  {
+    "name": "Motionless In White",
+    "albums": [
+      "Creatures",
+      "Infamous",
+      "Reincarnate",
+      "Graveyard Shift",
+      "Disguise",
+      "Scoring The End Of The World",
+      "Decades"
+    ],
+
+    "genres": [
+      "metal",
+      "metalcore",
+      "industrial metal",
+      "gothic metal",
+      "alternative metal"
+    ],
+
+    "mood": ["energetic", "aggressive", "dark", "emotional"],
+
+    "era": "2010s",
+    "similarArtists": [
+      "Ice Nine Kills",
+      "Black Veil Brides",
+      "Falling In Reverse",
+      "Bad Omens"
+    ],
+    "imageUrl": "../images/motionless_in_white.jpg"
+  },
+
+  {
+    "name": "Korn",
+    "albums": [
+      "Korn",
+      "Life Is Peachy",
+      "Follow The Leader",
+      "Issues",
+      "Untouchables",
+      "Take A Look In The Mirror",
+      "See You On The Other Side",
+      "Untitled",
+      "Korn III: Remember Who You Are",
+      "The Path Of Totality",
+      "The Paradigm Shift",
+      "The Serenity Of Suffering",
+      "The Nothing",
+      "Requiem"
+    ],
+    "genres": [
+      "hard rock",
+      "nu metal",
+      "alternative metal",
+      "rap metal",
+      "metal"
+    ],
+    "mood": ["aggressive", "dark", "emotional", "energetic"],
+    "era": "2000s",
+    "similarArtists": ["Adema", "Deftones", "Slipknot", "Limp Bizkit"],
+    "imageUrl": "../images/korn.jpg"
+  },
+  {
+    "name": "Bring Me The Horizon",
+    "albums": [
+      "Count Your Blessings",
+      "Suicide Season",
+      "There Is A Hell, Believe Me I've Seen It. There Is A Heaven, Let's Keep it a Secret",
+      "Sempiternal",
+      "That's The Spirit",
+      "amo",
+      "Music to listen to...",
+      "POST HUMAN: SURVIVAL HORROR",
+      "POST HUMAN: NeX GEn",
+      "Lo-files"
+    ],
+    "genres": [
+      "metalcore",
+      "emo",
+      "screamo",
+      "rock",
+      "post-hardcore",
+      "hard rock",
+      "deathcore",
+      "metal"
+    ],
+    "mood": ["aggressive", "dark", "emotional", "energetic", "sad", "hopeful"],
+    "era": "2010s",
+    "similarArtists": [
+      "Parkway Drive",
+      "As I Lay Dying",
+      "The Amity Affliction",
+      "Crown The Empire",
+      "Motionless In White",
+      "Bad Omens"
+    ],
+    "imageUrl": "../images/bring_me_the_horizon.jpg"
+  },
+  {
+    "name": "System Of A Down",
+    "albums": [
+      "System Of A Down",
+      "Toxicity",
+      "Steal This Album!",
+      "Mezmerize",
+      "Hypnotize"
+    ],
+    "genres": [
+      "alternative metal",
+      "nu metal",
+      "hard rock",
+      "rap metal",
+      "metal"
+    ],
+    "mood": ["aggressive", "emotional", "energetic", "silly", "hungry"],
+    "era": "2000s",
+    "similarArtists": ["Korn", "Limp Bizkit", "Deftones"],
+    "imageUrl": "../images/system_of_a_down.jpg"
+  },
+  {
+    "name": "Knocked Loose",
+    "albums": [
+      "Laugh Tracks",
+      "A Different Shade Of Blue",
+      "A Tear in the Fabric of Life",
+      "Upon Loss",
+      "You Won't Go Before You're Supposed To"
+    ],
+    "genres": ["metalcore", "mathcore", "hardcore punk", "metal", "deathcore"],
+    "mood": ["aggressive", "energetic", "scary", "dark"],
+    "era": "2010s",
+    "similarArtists": [
+      "Code Orange",
+      "Varials",
+      "Jesus Piece",
+      "Twelve Foot Ninja",
+      "Alpha Wolf"
+    ],
+    "imageUrl": "../images/knocked_loose.jpg"
+  },
+  {
+    "name": "Linkin Park",
+    "albums": [
+      "Hybrid Theory",
+      "Meteora",
+      "Minutes To Midnight",
+      "A Thousand Suns",
+      "Living Things",
+      "The Hunting Party",
+      "One More Light",
+      "From Zero"
+    ],
+    "genres": [
+      "alternative rock",
+      "nu metal",
+      "rap metal",
+      "alternative metal",
+      "rock",
+      "hard rock"
+    ],
+    "mood": ["emotional", "aggressive", "energetic", "sad", "clueless"],
+    "era": "2000s",
+    "similarArtists": [
+      "Korn",
+      "System Of A Down",
+      "Deftones",
+      "Papa Roach",
+      "Adema"
+    ],
+    "imageUrl": "../images/linkin_park.jpg"
+  },
+  {
+    "name": "From Ashes To New",
+    "albums": ["Day One", "The Future", "Panic", "Blackout", "Reflections"],
+    "genres": [
+      "rap rock",
+      "hard rock",
+      "modern metal",
+      "metalore",
+      "rap metal"
+    ],
+    "mood": ["energetic", "aggressive", "hopeful", "emotional"],
+    "era": "2020s",
+    "similarArtists": [
+      "Linkin Park",
+      "Hollywood Undead",
+      "Memphis May Fire",
+      "Motionless In White"
+    ],
+    "imageUrl": "../images/from_ashes_to_new.jpg"
+  }
+]
