@@ -1,0 +1,197 @@
+.Sidepanel {
+  grid-area: sidepanel;
+  height: 100%;
+  padding: 16px;
+  background: var(--panel);
+  color: var(--text);
+  border-right: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.Sidepanel-Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Sidepanel-Header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.Sidepanel-Header-Left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plusButton,
+.expandButton,
+.clearFiltersButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid color-mix(in oklab, var(--border) 55%, transparent);
+  border-radius: 999px;
+  background: #000000;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.05s ease;
+}
+
+.plusButton:active,
+.expandButton:active,
+.clearFiltersButton:active {
+  transform: scale(0.98);
+}
+
+.plusButton:hover,
+.expandButton:hover,
+.clearFiltersButton:hover {
+  background: #4d4d4d;
+  border-color: #4d4d4d;
+}
+
+.plusIcon,
+.expandIcon,
+.clearIcon {
+  font-size: 22px;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+}
+
+.plusIcon,
+.clearIcon {
+  transform: translate(0.5px, 0px);
+}
+
+.expandIcon {
+  transform: translate(0px, -0.5px);
+}
+
+.filterWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.filterList {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.filterList::-webkit-scrollbar {
+  display: none;
+}
+
+.filterButton,
+.arrowButtonBack,
+.arrowButtonForward {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid color-mix(in oklab, var(--border) 55%, transparent);
+  border-radius: 999px;
+  background: #1f1f1f;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.filterButton:hover,
+.arrowButtonBack:hover,
+.arrowButtonForward:hover {
+  background: #4d4d4d;
+  border-color: #4d4d4d;
+}
+
+.filterButton.active {
+  background: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
+}
+
+.filterButton.active:hover {
+  background: var(--accent);
+  color: #000000;
+  border-color: var(--accent);
+}
+
+.Sidepanel-Searchbar {
+  width: 100%;
+}
+
+.Sidepanel-Searchbar-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  outline: none;
+}
+
+.Sidepanel-Searchbar-input::placeholder {
+  color: color-mix(in oklab, var(--text) 70%, transparent);
+}
+
+.Sidepanel-Searchbar-input:focus {
+  border-color: var(--accent);
+}
+
+.Sidepanel-List {
+  flex: 1;
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px dashed color-mix(in oklab, var(--border) 55%, transparent);
+  background: color-mix(in oklab, var(--panel) 80%, #000000);
+}
+
+@media (max-width: 960px) {
+  .Sidepanel {
+    height: auto;
+    border-right: none;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .Sidepanel-List {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .filterButton,
+  .arrowButtonBack,
+  .arrowButtonForward {
+    height: 36px;
+    padding: 0 12px;
+    font-size: 0.9rem;
+  }
+
+  .plusButton,
+  .expandButton,
+  .clearFiltersButton {
+    width: 36px;
+    height: 36px;
+  }
+}

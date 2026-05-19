@@ -1,0 +1,79 @@
+.Header {
+  grid-area: header;
+  background-color: #60519b;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  gap: 10px;
+}
+
+.signinButton,
+.signupButton {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1.5px solid #000;
+  border-radius: 999px;
+  background: #b0a2e7;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.signinButton:hover,
+.signupButton:hover {
+  background: #1e202c;
+  color: #bfc0d1;
+}
+
+.Header-title {
+  text-align: left;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #bfc0d1;
+}
+
+.Header-logo {
+  width: 130px;
+  height: 100px;
+}
+
+@media (max-width: 600px) {
+  .Header {
+    padding: 12px 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: static;
+  }
+
+  .Header-title {
+    font-size: 1.4rem;
+  }
+
+  .Header-logo {
+    width: 90px;
+    height: 70px;
+  }
+
+  .header-left,
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .signinButton,
+  .signupButton {
+    margin-top: 0;
+    padding: 8px 12px;
+  }
+}
