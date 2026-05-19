@@ -13,7 +13,7 @@ export default function SignIn() {
           <input type="password" className="authorization_input" />
           <button className="authorization_button">Sign In</button>
           <p>
-            Don't have an account? <Link to="/signup">Sign Up</Link>
+            Don't have an account? <Link to="/signup"><span>Sign</span>Sign Up</Link>
           </p>
         </form>
       </div>

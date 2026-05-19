@@ -8,12 +8,68 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9909;
+  
+  
 }
 
 .SignUp {
-  background: white;
+  background:#1e202c;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 15px;
   max-width: 500px;
   width: 100%;
+  color: #bfe0d1;
+  min-height: 300px;
+  text-align: center;
+  margin: 0 auto 15px auto;
 }
+
+.authorization_input {
+    min-height: 35px;
+    border-radius: 10px;
+    min-width: 250px;
+    background-color: white;
+    margin-bottom: 0 auto 20px auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto ;
+    padding-left: 15px;
+}
+
+.authorization_button {
+    text-align: center;
+    border-radius: 9px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin: 15px auto 0 auto;
+    background-color: #31323e;
+    background: #b0a2e7;
+    color: #000000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1.5px solid #000;
+  }
+
+.SignUp_overlay::before {
+  content: "×";
+  position: absolute;
+  top: 10px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #bfe0d1;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.SignUp::before:hover {
+  color: #60519b;     
+}
+
+.SignUp span{
+    color:#bfe0d1;
+    text-decoration: underline;
+  }
