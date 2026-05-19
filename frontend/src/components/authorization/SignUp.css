@@ -14,6 +14,7 @@
 }
 
 .SignUp {
+  position: relative;
   background:#1e202c;
   padding: 20px;
   border-radius: 15px;
@@ -30,10 +31,10 @@
     border-radius: 10px;
     min-width: 250px;
     background-color: white;
-    margin-bottom: 0 auto 20px auto;
+    margin: 0 auto 20px auto;
     display: block;
     margin-left: auto;
-    margin-right: auto ;
+    margin-right: auto;
     padding-left: 15px;
 }
 
@@ -52,21 +53,24 @@
     border: 1.5px solid #000;
   }
 
-.SignUp_overlay::before {
-  content: "×";
+.CloseButton {
   position: absolute;
-  top: 10px;
-  right: 18px;
-  font-size: 28px;
-  font-weight: bold;
+  top: 12px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
   color: #bfe0d1;
-  cursor: pointer;
+  font-size: 28px;
   line-height: 1;
-  transition: color 0.2s ease;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.SignUp::before:hover {
-  color: #60519b;     
+.CloseButton:hover {
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
 .SignUp span{

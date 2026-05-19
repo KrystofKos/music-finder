@@ -1,12 +1,23 @@
 import "./SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
+  const navigate = useNavigate();
+  const close = () => navigate("/");
+
   return (
-    <div className="SignUp_overlay">
-      <div className="SignUp">
+    <div className="SignUp_overlay" onClick={close} role="presentation">
+      <div className="SignUp" onClick={(e) => e.stopPropagation()}>
+        <button
+          type="button"
+          className="CloseButton"
+          aria-label="Close sign up"
+          onClick={close}
+        >
+          ×
+        </button>
         <h2>Sign Up</h2>
-        <form action="">
+        <form onSubmit={(e) => e.preventDefault()}>
           <h3>E-mail</h3>
           <input type="email" className="authorization_input" />
           <h3>Name</h3>
@@ -15,9 +26,14 @@ export default function SignUp() {
           <input type="password" className="authorization_input" />
           <h3>Repeat password</h3>
           <input type="password" className="authorization_input" />
-          <button>Sign Up</button>
+          <button type="submit" className="authorization_button">
+            Sign Up
+          </button>
           <p>
-            Already have an account? <Link to="signin"><span>Sign In</span>Sign in</Link>
+            Already have an account?{" "}
+            <Link to="/signin">
+              <span>Sign In</span>
+            </Link>
           </p>
         </form>
       </div>

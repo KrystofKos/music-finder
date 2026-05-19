@@ -49,7 +49,7 @@
     border-radius: 10px;
     min-width: 250px;
     background-color: white;
-    margin-bottom: 0 auto 20px auto;
+    margin: 0 auto 20px auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -72,7 +72,7 @@
   }
 
   .authorization_button:hover {
-   background-color: #60519b; /* Změna na fialovou po najetí */
+   background-color: #60519b;
    border-color: #60519b;
    color: #ffffff;
 }
