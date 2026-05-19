@@ -1,6 +1,6 @@
 import "./App.css";
-import SignIn from "./components/Authorization/SignIn";
-import SignUp from "./components/Authorization/SignUp";
+import SignIn from "./components/authorization/SignIn";
+import SignUp from "./components/authorization/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SidePanel from "./components/SidePanel/SidePanel";
 import Header from "./components/Header/Header";

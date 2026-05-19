@@ -77,3 +77,14 @@
     color:#bfe0d1;
     text-decoration: underline;
   }
+
+.authError {
+  margin: 10px 0 0 0;
+  color: #ffb4b4;
+  font-size: 0.95rem;
+}
+
+.authorization_button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

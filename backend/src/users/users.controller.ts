@@ -9,4 +9,9 @@ export class UsersController {
   async register(@Body() body: any) {
     return this.usersService.create(body);
   }
+
+  @Post('login')
+  async login(@Body() body: any) {
+    return this.usersService.login(body);
+  }
 }
