@@ -7,6 +7,9 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
 import "./App.css";
+import SignIn from "./components/authorization/SignIn";
+import SignUp from "./components/authorization/SignUp";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [artists, setArtists] = useState<Artist[]>([]);
@@ -219,11 +222,16 @@ function App() {
   );
 
   return (
-    <div className={`Body ${isSidepanelExpanded ? "expanded" : ""}`}>
-      {header}
-      {sidepanel}
-      {searchbar}
-      {results}
+    <div className="Body">
+      <BrowserRouter>
+        {header}
+        {searchbar}
+        {results}
+        <Routes>
+          <Route path="signup" element={<SignUp />} />
+          <Route path="signin" element={<SignIn />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

@@ -1,0 +1,84 @@
+.SignIn_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9909;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SignIn {
+  position: relative;
+  background:#1e202c;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 100%;
+  color: #bfe0d1;
+  min-height: 300px;
+  text-align: center;
+  margin: 0 auto 15px auto;
+}
+
+.CloseButton {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #bfe0d1;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.CloseButton:hover {
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.authorization_input {
+    min-height: 35px;
+    border-radius: 10px;
+    min-width: 250px;
+    background-color: white;
+    margin: 0 auto 20px auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+}
+
+.authorization_button {
+    text-align: center;
+    border-radius: 9px;
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    margin: 15px auto 0 auto;
+    background-color: #31323e;
+    background: #b0a2e7;
+    color: #000000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1.5px solid #000 ;
+  }
+
+  .authorization_button:hover {
+   background-color: #60519b;
+   border-color: #60519b;
+   color: #ffffff;
+}
+
+  .SignIn span{
+    color:#bfe0d1;
+    text-decoration: underline;
+    cursor: pointer;
+  }
