@@ -1,3 +1,4 @@
+import RightSidePanel from "./components/RightSidePanel/RightSidePanel";
 import "./App.css";
 import SignIn from "./components/authorization/SignIn";
 import SignUp from "./components/authorization/SignUp";
@@ -83,8 +84,9 @@ function App() {
   return (
     <div className="wrapper">
       <BrowserRouter>
-        <Header />
+        {/* <Header /> */}
         <SidePanel />
+        <RightSidePanel />
         <main className="Main">
           <SearchBar
             query={query}
