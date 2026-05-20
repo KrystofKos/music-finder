@@ -1,3 +1,4 @@
+import RightSidePanel from "./components/RightSidePanel/RightSidePanel";
 import "./App.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -103,10 +104,11 @@ function App() {
   }, [query]);
 
   return (
-    <BrowserRouter>
-      <div className="wrapper">
+    <div className="wrapper">
+      <BrowserRouter>
+        {/* <Header /> */}
         <SidePanel />
-
+        <RightSidePanel />
         <main className="Main">
           <Routes>
             <Route
