@@ -35,18 +35,6 @@
   color: #bfc0d1;
 }
 
-.Header-title {
-  text-align: left;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #bfc0d1;
-}
-
-.Header-logo {
-  width: 130px;
-  height: 100px;
-}
-
 @media (max-width: 600px) {
   .Header {
     padding: 12px 14px;
