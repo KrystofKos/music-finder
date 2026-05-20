@@ -28,7 +28,14 @@ export async function apiFetch<T>(
   });
 
   const text = await res.text();
-  const body = text ? (JSON.parse(text) as unknown) : null;
+  let body: unknown = null;
+  if (text) {
+    try {
+      body = JSON.parse(text) as unknown;
+    } catch {
+      body = text;
+    }
+  }
 
   if (!res.ok) {
     throw new ApiError("Request failed", res.status, body);
@@ -36,4 +43,3 @@ export async function apiFetch<T>(
 
   return body as T;
 }
-

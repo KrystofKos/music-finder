@@ -1,19 +1,21 @@
+import { apiFetch } from "./http";
+
 export interface Artist {
-  _id: string;
+  id: number;
   name: string;
-  albums: string[];
-  genres: string[];
-  mood: string[];
-  era: string;
-  similarArtists: string[];
-  imageUrl: string;
+  image: string;
+  popularity: number;
+  link: string;
+  bestTrack: null | {
+    title: string;
+    preview: string;
+  };
 }
 
-export const getArtists = async (query?: string) => {
-  const url = query
-    ? `http://localhost:3000/artists?query=${encodeURIComponent(query)}`
-    : `http://localhost:3000/artists`;
-
-  const res = await fetch(url);
-  return res.json();
+export const getArtists = async (query: string, signal?: AbortSignal) => {
+  const data = await apiFetch<unknown>(
+    `/artists?query=${encodeURIComponent(query)}`,
+    { signal },
+  );
+  return Array.isArray(data) ? (data as Artist[]) : [];
 };

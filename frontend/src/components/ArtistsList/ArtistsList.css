@@ -1,0 +1,82 @@
+.ArtistsList {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+.ArtistsList-empty {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--panel) 80%, transparent);
+}
+
+.ArtistCard {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.ArtistCard-img {
+  width: 84px;
+  height: 84px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+}
+
+.ArtistCard-body {
+  min-width: 0;
+}
+
+.ArtistCard-titleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ArtistCard-name {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ArtistCard-name:hover {
+  text-decoration: underline;
+}
+
+.ArtistCard-popularity {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.ArtistCard-track {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.ArtistCard-trackMuted {
+  opacity: 0.7;
+}
+
+.ArtistCard-trackLabel {
+  opacity: 0.8;
+}
+
+.ArtistCard-audio {
+  margin-top: 8px;
+  width: 100%;
+  height: 32px;
+}
+
