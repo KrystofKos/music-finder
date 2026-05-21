@@ -1,4 +1,3 @@
-import PlayBack from "./components/PlayBack/PlayBack";
 import RightSidePanel from "./components/RightSidePanel/RightSidePanel";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -108,7 +107,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        <PlayBack />
         <SidePanel />
         <main className="Main">
           <Routes>
