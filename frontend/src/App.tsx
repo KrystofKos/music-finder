@@ -1,23 +1,24 @@
 import RightSidePanel from "./components/RightSidePanel/RightSidePanel";
 import "./App.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-
 import SignIn from "./components/authorization/SignIn";
 import SignUp from "./components/authorization/SignUp";
-
 import SidePanel from "./components/SidePanel/SidePanel";
-
 import SearchBar from "./components/SearchBar/SearchBar";
+import Dashboard from "./pages/Dashboard";
+import Favorite from "./pages/Favorite";
+import Friends from "./pages/Friends";
+import LiveChat from "./pages/LiveChat";
+import MobileApp from "./pages/MobileApp";
 import ArtistsList from "./components/ArtistsList/ArtistsList";
 import TracksList from "./components/TracksList/TracksList";
-
-import UserProfile from "./components/UserProfile/UserProfile";
-
+import UserProfile from "./pages/UserProfile";
 import { getArtists, type Artist } from "./api/artists";
 import { getTracks, type Track } from "./api/tracks";
 import { ApiError } from "./api/http";
+import Settings from "./pages/Settings";
+import FaQs from "./pages/FaQs";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -104,11 +105,9 @@ function App() {
   }, [query]);
 
   return (
-    <div className="wrapper">
-      <BrowserRouter>
-        {/* <Header /> */}
+    <BrowserRouter>
+      <div className="wrapper">
         <SidePanel />
-        <RightSidePanel />
         <main className="Main">
           <Routes>
             <Route
@@ -130,13 +129,19 @@ function App() {
                 </>
               }
             />
-
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
-
-            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/favorite" element={<Favorite />} />
+            <Route path="/friends" element={<Friends />} />
+            <Route path="/livechat" element={<LiveChat />} />
+            <Route path="/mobileapp" element={<MobileApp />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/faqs" element={<FaQs />} />
           </Routes>
         </main>
+        <RightSidePanel />
       </div>
     </BrowserRouter>
   );

@@ -1,6 +1,6 @@
 import "./SidePanel.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { VscAccount } from "react-icons/vsc";
 import { RxDashboard } from "react-icons/rx";
 import { RxHeart } from "react-icons/rx";
@@ -12,93 +12,108 @@ import { TfiHeadphoneAlt } from "react-icons/tfi";
 
 export default function SidePanel() {
   const [active, setActive] = useState<string>("Profile");
-  const navigate = useNavigate();
   const handleClick = (name: string) => {
     setActive(name);
-    console.log("Clicked:", name);
   };
 
   return (
     <div className="Sidepanel">
-      <div className="Sidepanel-Header">
-        <img src="images/logo.png" alt="Logo" className="Header-logo" />
-        <h1 className="Header-title">Music Finder</h1>
-      </div>
-
+      <Link to="/">
+        <div className="Sidepanel-Header">
+          <img src="images/logo.png" alt="Logo" className="Header-logo" />
+          <h1 className="Header-title">Music Finder</h1>
+        </div>
+      </Link>
       <div className="Sidepanel-Scroll">
         <div className="Sidepanel-Menu">
           <h2>Menu</h2>
         </div>
 
         <div className="Sidepanel-List">
-          <div
-            className={`Sidepanel-List-Item ${active === "Profile" ? "active" : ""}`}
-            onClick={() => {handleClick("Profile"); navigate("/userprofile");}}
-          >
-            <VscAccount className="item-icon" />
-            <span className="item-text">Profile</span>
-          </div>
+          <Link to="/profile">
+            <div
+              className={`Sidepanel-List-Item ${active === "Profile" ? "active" : ""}`}
+              onClick={() => handleClick("Profileo")}
+            >
+              <VscAccount className="item-icon" />
+              <span className="item-text">Profile</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "Dashboard" ? "active" : ""}`}
-            onClick={() => handleClick("Dashboard")}
-          >
-            <RxDashboard className="item-icon" />
-            <span className="item-text">Dashboard</span>
-          </div>
+          <Link to="dashboard">
+            <div
+              className={`Sidepanel-List-Item ${active === "Dashboard" ? "active" : ""}`}
+              onClick={() => handleClick("Dashboard")}
+            >
+              <RxDashboard className="item-icon" />
+              <span className="item-text">Dashboard</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "Favorite" ? "active" : ""}`}
-            onClick={() => handleClick("Favorite")}
-          >
-            <RxHeart className="item-icon" />
-            <span className="item-text">Favorite</span>
-          </div>
+          <Link to="favorite">
+            <div
+              className={`Sidepanel-List-Item ${active === "Favorite" ? "active" : ""}`}
+              onClick={() => handleClick("Favorite")}
+            >
+              <RxHeart className="item-icon" />
+              <span className="item-text">Favorite</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "Live Chat" ? "active" : ""}`}
-            onClick={() => handleClick("Live Chat")}
-          >
-            <IoChatboxEllipsesOutline className="item-icon" />
-            <span className="item-text">Live Chat</span>
-          </div>
+          <Link to="livechat">
+            <div
+              className={`Sidepanel-List-Item ${active === "Live Chat" ? "active" : ""}`}
+              onClick={() => handleClick("Live Chat")}
+            >
+              <IoChatboxEllipsesOutline className="item-icon" />
+              <span className="item-text">Live Chat</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "Friends" ? "active" : ""}`}
-            onClick={() => handleClick("Friends")}
-          >
-            <LiaUserFriendsSolid className="item-icon" />
-            <span className="item-text">Friends</span>
-          </div>
+          <Link to="friends">
+            <div
+              className={`Sidepanel-List-Item ${active === "Friends" ? "active" : ""}`}
+              onClick={() => handleClick("Friends")}
+            >
+              <LiaUserFriendsSolid className="item-icon" />
+              <span className="item-text">Friends</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "Mobile App" ? "active" : ""}`}
-            onClick={() => handleClick("Mobile App")}
-          >
-            <CiMobile2 className="item-icon" />
-            <span className="item-text">Mobile App</span>
-          </div>
+          <Link to="mobileapp">
+            <div
+              className={`Sidepanel-List-Item ${active === "Mobile App" ? "active" : ""}`}
+              onClick={() => handleClick("Mobile App")}
+            >
+              <CiMobile2 className="item-icon" />
+              <span className="item-text">Mobile App</span>
+            </div>
+          </Link>
         </div>
 
         <div className="Sidepanel-Help">
           <h2>Help</h2>
         </div>
         <div className="Sidepanel-List">
-          <div
-            className={`Sidepanel-List-Item ${active === "Settings" ? "active" : ""}`}
-            onClick={() => handleClick("Settings")}
-          >
-            <IoSettingsOutline className="item-icon" />
-            <span className="item-text">Settings</span>
-          </div>
+          <Link to="/settings">
+            <div
+              className={`Sidepanel-List-Item ${active === "Settings" ? "active" : ""}`}
+              onClick={() => handleClick("Settings")}
+            >
+              <IoSettingsOutline className="item-icon" />
+              <span className="item-text">Settings</span>
+            </div>
+          </Link>
 
-          <div
-            className={`Sidepanel-List-Item ${active === "FAQs" ? "active" : ""}`}
-            onClick={() => handleClick("FAQs")}
-          >
-            <TfiHeadphoneAlt className="item-icon" />
-            <span className="item-text">FAQs</span>
-          </div>
+          <Link to="/faqs">
+            <div
+              className={`Sidepanel-List-Item ${active === "FAQs" ? "active" : ""}`}
+              onClick={() => handleClick("FAQs")}
+            >
+              <TfiHeadphoneAlt className="item-icon" />
+              <span className="item-text">FAQs</span>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -27,11 +27,10 @@ body {
   min-height: 100vh;
 
   grid-template-areas:
-    "header header"
-    "sidepanel main";
+    "sidepanel main rightpanel";
 
-  grid-template-columns: 320px 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: 320px minmax(0, 1fr) 348px;
+  grid-template-rows: 1fr;
 }
 
 .Main {
@@ -43,16 +42,14 @@ body {
 @media (max-width: 960px) {
   .wrapper {
     grid-template-areas:
-      "header"
       "sidepanel"
-      "main";
+      "main"
+      "rightpanel";
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto 1fr;
+    grid-template-rows: auto 1fr auto;
   }
 }
 
-@media (max-width: 600px) {
-  .Main {
-    padding: 14px;
-  }
+a {
+  text-decoration: none;
 }

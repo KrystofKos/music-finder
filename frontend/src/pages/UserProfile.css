@@ -1,18 +1,4 @@
-.UserProfile {
-  width: 100%;
-  min-height: 100vh;
 
-  background: #181818;
-  color: #ffffff;
-
-  padding: 40px;
-
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-
-  overflow-y: auto;
-}
 
 /* MAIN CARD */
 .profile-card {
