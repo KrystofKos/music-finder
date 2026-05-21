@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersController } from './users.controller';
+import { User, UserSchema } from './users.schema'; // Tvoje schéma uživatele
 import { UsersService } from './users.service';
-import { User, UserSchema } from './users.schema';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [
+    // Tady se uživatelé vážou na MongoDB
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  controllers: [UsersController], // Přidat sem
-  providers: [UsersService], // Přidat sem
+  providers: [UsersService],
+  controllers: [UsersController],
 })
 export class UsersModule {}

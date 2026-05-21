@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Finder - Live Chat</title>
+    <style>
+        body { background: #121212; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        #chat-box { width: 450px; background: #1e1e1e; padding: 20px; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: #888; font-size: 1.2em; }
+        #messages { height: 350px; overflow-y: auto; margin-bottom: 15px; padding: 10px; background: #161616; border-radius: 10px; display: flex; flex-direction: column; }
+        .msg { padding: 8px 12px; margin: 5px; border-radius: 10px; max-width: 80%; }
+        .msg.other { background: #333; align-self: flex-start; }
+        .controls { display: flex; gap: 5px; }
+        input { background: #2a2a2a; border: none; padding: 10px; color: white; border-radius: 5px; flex-grow: 1; }
+        button { background: #00796b; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="chat-box">
+        <h2>🎵 Music Finder - Live Chat</h2>
+        <div id="messages"></div>
+        <div class="controls">
+            <input type="text" id="userInput" value="User">
+            <input type="text" id="msgInput" placeholder="Napiš zprávu...">
+            <button onclick="poslat()">➤</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+        const messagesDiv = document.getElementById('messages');
+
+        function addMsg(msg) {
+            const div = document.createElement('div');
+            div.className = 'msg other';
+            div.innerHTML = `<strong>${msg.user}:</strong> ${msg.text}`;
+            messagesDiv.appendChild(div);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function poslat() {
+            const user = document.getElementById('userInput').value;
+            const text = document.getElementById('msgInput').value;
+            if(text) { socket.emit('sendMessage', { user, text }); document.getElementById('msgInput').value = ''; }
+        }
+
+        socket.on('chatHistory', (history) => history.forEach(addMsg));
+        socket.on('newMessage', addMsg);
+    </script>
+</body>
+</html>
