@@ -1,8 +1,10 @@
 import "./UserProfile.css";
 import { useNavigate } from "react-router-dom";
+import { clearUser, getUser } from "../auth/session";
 
 const UserProfile = () => {
   const navigate = useNavigate();
+  const user = getUser();
 
   return (
     <div className="UserProfile">
@@ -15,8 +17,8 @@ const UserProfile = () => {
           />
 
           <div className="profile-info">
-            <h1 className="profile-name">Username</h1>
-            <p className="profile-email">user@email.com</p>
+            <h1 className="profile-name">{user?.username ?? "Guest"}</h1>
+            <p className="profile-email">{user?.email ?? "Not signed in"}</p>
           </div>
 
           <button className="returnButton" onClick={() => navigate("/")}>
@@ -61,7 +63,21 @@ const UserProfile = () => {
 
         <div className="profile-actions">
           <button className="edit-button">Edit Profile</button>
-          <button className="logout-button">Logout</button>
+          {user ? (
+            <button
+              className="logout-button"
+              onClick={() => {
+                clearUser();
+                navigate("/");
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <button className="logout-button" onClick={() => navigate("/signin")}>
+              Sign In
+            </button>
+          )}
         </div>
       </div>
     </div>

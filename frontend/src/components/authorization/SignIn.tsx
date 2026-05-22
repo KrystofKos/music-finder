@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
+import { ApiError } from "../../api/http";
 import { saveUser } from "../../auth/session";
 import "./SignIn.css";
 
@@ -20,8 +21,12 @@ export default function SignIn() {
       const user = await login({ email, password });
       saveUser(user);
       close();
-    } catch {
-      setError("Wrong email or password");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(`API error ${err.status}`);
+      } else {
+        setError("Wrong email or password");
+      }
     } finally {
       setIsSubmitting(false);
     }

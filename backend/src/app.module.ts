@@ -9,15 +9,14 @@ import { TracksModule } from './tracks/tracks.module';
 const logger = new Logger('AppModule');
 if (!process.env.MONGO_URI) {
   logger.warn(
-    'MONGO_URI is not set; UsersModule/Mongoose are disabled (artists/tracks search will still work).',
+    'MONGO_URI is not set; UsersModule will use file-based storage (artists/tracks search will still work).',
   );
 }
 
 @Module({
   imports: [
-    ...(process.env.MONGO_URI
-      ? [MongooseModule.forRoot(process.env.MONGO_URI), UsersModule]
-      : []),
+    ...(process.env.MONGO_URI ? [MongooseModule.forRoot(process.env.MONGO_URI)] : []),
+    UsersModule,
     ArtistsModule,
     TracksModule,
   ],

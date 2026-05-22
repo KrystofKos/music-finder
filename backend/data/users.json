@@ -1,0 +1,20 @@
+[
+  {
+    "_id": "759954ad-eeaf-47f7-96a7-262788e83bf7",
+    "email": "visowiacsgo@gmail.com",
+    "password": "$2b$10$vIw3CwSsb/AZOknl1yTG.uBhmnsW97TgkudwlFtyLhvgbEU64Tcym",
+    "username": "visowiacsgo@gmail.com"
+  },
+  {
+    "_id": "c9279329-ed13-4935-9f05-e8d0b59a96b6",
+    "email": "egor228@gmail.com",
+    "password": "$2b$10$wEVh/2ZXIpu9EKwSVKjOiuJ29EANNnsr4tYZ1Uv8yGRyMD1IK.Dv6",
+    "username": "egorka228"
+  },
+  {
+    "_id": "d2a81f98-0111-42b2-b6f2-ddaa38e0f3d0",
+    "email": "visowiacsgoo@gmail.com",
+    "password": "$2b$10$5951l9E6azsp6tzTKTcmHOVp1FN6hjBmYYwXJg9zA5YOJe91FIEIO",
+    "username": "visowiacsgoo@gmail.com"
+  }
+]
