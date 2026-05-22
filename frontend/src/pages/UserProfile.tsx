@@ -6,7 +6,6 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const user = getUser();
 
-  const user = getUser();
 
   return (
     <div className="UserProfile">
@@ -14,9 +13,9 @@ const UserProfile = () => {
         {/* HEADER */}
         <div className="profile-header">
           <div className="profile-avatar">
-            {user?.photo ? (
+            {user?.username ? (
               <img
-                src={user.photo}
+                // src={user.photo}
                 alt="Profile"
                 className="profile-avatar-image"
               />
@@ -46,23 +45,23 @@ const UserProfile = () => {
           <div className="profile-sub-section">
             <div className="about-container">
               <div className="about-text">
-                {user?.bio || "This user has no bio yet."}
+                {/* {user?.bio || "This user has no bio yet."} */}
               </div>
 
               <div className="about-stats">
                 <div className="stat-card">
                   <h3>Followers</h3>
-                  <p>{user?.followers || 0}</p>
+                  {/* <p>{user?.followers || 0}</p> */}
                 </div>
 
                 <div className="stat-card">
                   <h3>Following</h3>
-                  <p>{user?.following || 0}</p>
+                  {/* <p>{user?.following || 0}</p> */}
                 </div>
 
                 <div className="stat-card">
                   <h3>Playlists</h3>
-                  <p>{user?.playlists?.length || 0}</p>
+                  {/* <p>{user?.playlists?.length || 0}</p> */}
                 </div>
               </div>
             </div>
@@ -77,7 +76,7 @@ const UserProfile = () => {
 
           <div className="profile-sub-section">
             <div className="playlist-grid">
-              {user?.playlists?.length ? (
+              {/* {user?.playlists?.length ? (
                 user.playlists.map((playlist: any, index: number) => (
                   <div className="playlist-card" key={index}>
                     <div className="playlist-cover"></div>
@@ -90,7 +89,7 @@ const UserProfile = () => {
                 ))
               ) : (
                 <p>No playlists yet.</p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -103,7 +102,7 @@ const UserProfile = () => {
 
           <div className="profile-sub-section">
             <div className="artists-grid">
-              {user?.favoriteArtists?.length ? (
+              {/* {user?.favoriteArtists?.length ? (
                 user.favoriteArtists.map((artist: any, index: number) => (
                   <div className="artist-card" key={index}>
                     <img
@@ -120,7 +119,7 @@ const UserProfile = () => {
                 ))
               ) : (
                 <p>No favorite artists yet.</p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -133,7 +132,7 @@ const UserProfile = () => {
 
           <div className="profile-sub-section">
             <div className="albums-grid">
-              {user?.favoriteAlbums?.length ? (
+              {/* {user?.favoriteAlbums?.length ? (
                 user.favoriteAlbums.map((album: any, index: number) => (
                   <div className="album-card" key={index}>
                     <div className="album-cover"></div>
@@ -146,7 +145,7 @@ const UserProfile = () => {
                 ))
               ) : (
                 <p>No favorite albums yet.</p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -159,7 +158,7 @@ const UserProfile = () => {
 
           <div className="profile-sub-section">
             <div className="friends-list">
-              {user?.friends?.length ? (
+              {/* {user?.friends?.length ? (
                 user.friends.map((friend: any, index: number) => (
                   <div className="friend-card" key={index}>
                     <img
@@ -176,7 +175,7 @@ const UserProfile = () => {
                 ))
               ) : (
                 <p>No friends added yet.</p>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -185,7 +184,21 @@ const UserProfile = () => {
         <div className="profile-actions">
           <button className="edit-button">Edit Profile</button>
 
-          <button className="logout-button">Logout</button>
+          {user ? (
+            <button
+              className="logout-button"
+              onClick={() => {
+                clearUser();
+                navigate("/");
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <button className="logout-button" onClick={() => navigate("/signin")}>
+              Sign In
+            </button>
+          )}
         </div>
       </div>
     </div>

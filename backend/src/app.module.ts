@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ArtistsModule } from './artists/artists.module';
 import { TracksModule } from './tracks/tracks.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 const logger = new Logger('AppModule');
 if (!process.env.MONGO_URI) {
@@ -19,6 +20,7 @@ if (!process.env.MONGO_URI) {
     UsersModule,
     ArtistsModule,
     TracksModule,
+    DashboardModule,
   ],
   controllers: [AppController],
   providers: [AppService],

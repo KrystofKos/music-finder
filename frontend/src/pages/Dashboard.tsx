@@ -1,11 +1,15 @@
 import { BsMusicNote } from "react-icons/bs";
 import { TfiHeadphone } from "react-icons/tfi";
-import { useState, useRef, useEffect } from "react";
+import { useMemo, useRef, useEffect, useState } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { BiSolidLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
+
+import { getDashboardTopTracks } from "../api/dashboard";
+import type { Track } from "../api/tracks";
+import { usePlayback } from "../playback/PlaybackContext";
 
 import exampleImage from "../pages/dashboard-images/exampleimage.webp";
 import pop from "../pages/dashboard-images/pop.jfif";
@@ -20,11 +24,13 @@ import edm from "../pages/dashboard-images/edm.jfif";
 import "./Dashboard.css";
 
 const Dashboard = () => {
-  const [playingSong, setPlayingSong] = useState(null);
+  const { currentTrack, isPlaying, setIsPlaying, playTrack } = usePlayback();
+  const [topTracks, setTopTracks] = useState<Track[]>([]);
+  const [loadingTop, setLoadingTop] = useState(false);
 
   const navigate = useNavigate();
 
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(true);
@@ -73,28 +79,31 @@ const Dashboard = () => {
     },
   ];
 
-  const songs = [
-    {
-      id: 1,
-      artist: "The Weeknd",
-      song: "Blinding Lights",
-      duration: "3:20",
-    },
-    {
-      id: 2,
-      artist: "MIW",
-      song: "Another Life",
-      duration: "3:26",
-    },
-    {
-      id: 3,
-      artist: "Post Malone",
-      song: "Circles",
-      duration: "3:35",
-    },
-  ];
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoadingTop(true);
+    getDashboardTopTracks(3, controller.signal)
+      .then(setTopTracks)
+      .catch(() => setTopTracks([]))
+      .finally(() => setLoadingTop(false));
+    return () => controller.abort();
+  }, []);
 
-  const scroll = (dir) => {
+  const songs = useMemo(
+    () =>
+      topTracks.map((t) => ({
+        id: t.id,
+        artist: t.artist?.name ?? "Unknown artist",
+        song: t.title,
+        duration: `${Math.floor((t.duration ?? 0) / 60)}:${String(
+          (t.duration ?? 0) % 60,
+        ).padStart(2, "0")}`,
+        track: t,
+      })),
+    [topTracks],
+  );
+
+  const scroll = (dir: "left" | "right") => {
     const el = scrollRef.current;
     if (!el) return;
 
@@ -191,11 +200,18 @@ const Dashboard = () => {
           </div>
 
           <div className="title-right">
-            <a href="./topmusic">Show More...</a>
+            <button
+              type="button"
+              className="returnButton"
+              onClick={() => navigate("/topmusic")}
+            >
+              Show More...
+            </button>
           </div>
         </div>
 
         <div className="top-music-list">
+          {loadingTop ? <p style={{ margin: 0 }}>Loading...</p> : null}
           {songs.map((song, i) => (
             <div className="song-box" key={song.id}>
               <h1 className="chart-position">#{i + 1}</h1>
@@ -209,14 +225,17 @@ const Dashboard = () => {
               <p className="duration">{song.duration}</p>
 
               <button
-                className={`pause-button ${
-                  playingSong === song.id ? "playing" : ""
-                }`}
-                onClick={() =>
-                  setPlayingSong(playingSong === song.id ? null : song.id)
-                }
+                className={`pause-button ${currentTrack?.id === song.id && isPlaying ? "playing" : ""}`}
+                onClick={() => {
+                  if (!song.track.preview) return;
+                  if (currentTrack?.id === song.id) {
+                    setIsPlaying(!isPlaying);
+                    return;
+                  }
+                  playTrack(song.track);
+                }}
               >
-                {playingSong === song.id ? <FaPause /> : <FaPlay />}
+                {currentTrack?.id === song.id && isPlaying ? <FaPause /> : <FaPlay />}
               </button>
             </div>
           ))}

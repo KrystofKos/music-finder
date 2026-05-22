@@ -4,6 +4,8 @@ import {HiOutlineDotsVertical } from "react-icons/hi";
 import Images from "../../../images/TemplateImages.png";
 import "./RightSidePanel.css";
 import { usePlayback } from "../../playback/PlaybackContext";
+import { getUser, onUserChange } from "../../auth/session";
+import { useEffect, useMemo, useState } from "react";
 
 function formatAgo(msAgo: number) {
   const seconds = Math.max(0, Math.floor(msAgo / 1000));
@@ -18,89 +20,79 @@ function formatAgo(msAgo: number) {
 
 export default function RightSidePanel() {
   const { recentlyPlayed, playTrack } = usePlayback();
+  const [user, setUser] = useState(() => getUser());
+
+  useEffect(() => onUserChange(() => setUser(getUser())), []);
+
+  const topArtists = useMemo(() => {
+    const map = new Map<
+      number,
+      { id: number; name: string; picture?: string; plays: number }
+    >();
+
+    for (const item of recentlyPlayed) {
+      const a = item.track.artist;
+      if (!a) continue;
+      const prev = map.get(a.id);
+      if (prev) {
+        prev.plays += 1;
+      } else {
+        map.set(a.id, {
+          id: a.id,
+          name: a.name,
+          picture: a.picture,
+          plays: 1,
+        });
+      }
+    }
+
+    return Array.from(map.values())
+      .sort((a, b) => b.plays - a.plays)
+      .slice(0, 5);
+  }, [recentlyPlayed]);
+
   return (
     <div className="right-side-panel">
       <div className="user-header">
         <img src={Images} alt="Tarisa" className="user-header-img" />
         <div className="user-header-text">
-          <h2>Tarisa</h2>
-          <p>Premium Blog</p>
+          <h2>{user?.username ?? "Guest"}</h2>
+          <p>{user?.email ?? "Not signed in"}</p>
         </div>
         <CiBellOn className="user-header-bell" />
       </div>
       <h2>Top Artist</h2>
       <div className="section-scroll top-artist-scroll">
         <ul>
-          <li>
-            <div className="artist-info">
-              <div className="artist-info-left">
-                <img src={Images} alt="Jackie Burhan" />
-                <div className="artist-info-text">
-                  <h3>Jackie Burhan</h3>
-                  <p>500 play album</p>
+          {topArtists.length === 0 ? (
+            <li>
+              <div className="artist-info">
+                <div className="artist-info-left">
+                  <div className="artist-info-text">
+                    <h3>No data yet</h3>
+                    <p>Play some tracks first.</p>
+                  </div>
                 </div>
               </div>
-              <div className="artist-info-right">
-                <HiOutlineDotsVertical className="dots-icon" />
-              </div>
-            </div>
-          </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Maria" />
-              <div className="artist-info-text">
-                <h3>Maria</h3>
-                <p>100 play album</p>
-              </div>
-            </div>
-            <div className="artist-info-right">
-              <HiOutlineDotsVertical className="dots-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Jim Kho" />
-              <div className="artist-info-text">
-                <h3>Jim Kho</h3>
-                <p>359 play album</p>
-              </div>
-            </div>
-            <div className="artist-info-right">
-              <HiOutlineDotsVertical className="dots-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Aurora Sodakh" />
-              <div className="artist-info-text">
-                <h3>Aurora Sodakh</h3>
-                <p>89 play album</p>
-              </div>
-            </div>
-            <div className="artist-info-right">
-              <HiOutlineDotsVertical className="dots-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Marsha Mei" />
-              <div className="artist-info-text">
-                <h3>Marsha Mei</h3>
-                <p>550 play album</p>
-              </div>
-            </div>
-            <div className="artist-info-right">
-              <HiOutlineDotsVertical className="dots-icon" />
-            </div>
-          </div>
-        </li>
+            </li>
+          ) : (
+            topArtists.map((a) => (
+              <li key={a.id}>
+                <div className="artist-info">
+                  <div className="artist-info-left">
+                    <img src={a.picture ?? Images} alt={a.name} />
+                    <div className="artist-info-text">
+                      <h3>{a.name}</h3>
+                      <p>{a.plays} plays</p>
+                    </div>
+                  </div>
+                  <div className="artist-info-right">
+                    <HiOutlineDotsVertical className="dots-icon" />
+                  </div>
+                </div>
+              </li>
+            ))
+          )}
       </ul>
       </div>
       <h2>Recently Played</h2>

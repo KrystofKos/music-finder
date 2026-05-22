@@ -9,7 +9,7 @@ import { LiaUserFriendsSolid } from "react-icons/lia";
 import { CiMobile2 } from "react-icons/ci";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
-
+import Logo from "../../../images/logo.png";
 export default function SidePanel() {
   const [active, setActive] = useState<string>("Profile");
   const handleClick = (name: string) => {
@@ -20,7 +20,7 @@ export default function SidePanel() {
     <div className="Sidepanel">
       <Link to="/">
         <div className="Sidepanel-Header">
-          <img src="images/logo.png" alt="Logo" className="Header-logo" />
+          <img src={Logo} alt="Logo" className="Header-logo" />
           <h1 className="Header-title">Music Finder</h1>
         </div>
       </Link>

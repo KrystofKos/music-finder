@@ -15,13 +15,14 @@ import MobileApp from "./pages/MobileApp";
 import ArtistsList from "./components/ArtistsList/ArtistsList";
 import TracksList from "./components/TracksList/TracksList";
 import UserProfile from "./pages/UserProfile";
-import PlaylistDetail from "./pages/PlaylistDetail";
 import { getArtists, type Artist } from "./api/artists";
 import { getTracks, type Track } from "./api/tracks";
 import { ApiError } from "./api/http";
 import Settings from "./pages/Settings";
 import FaQs from "./pages/FaQs";
 import { PlaybackProvider } from "./playback/PlaybackContext";
+import Playlist from "./pages/Playlist";
+import TopMusic from "./pages/TopMusic";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -144,6 +145,8 @@ function App() {
               <Route path="/mobileapp" element={<MobileApp />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/faqs" element={<FaQs />} />
+              <Route path="/playlist/:id" element={<Playlist />} />
+              <Route path="/topmusic" element={<TopMusic />} />
             </Routes>
           </main>
           <RightSidePanel />
