@@ -15,6 +15,7 @@ import MobileApp from "./pages/MobileApp";
 import ArtistsList from "./components/ArtistsList/ArtistsList";
 import TracksList from "./components/TracksList/TracksList";
 import UserProfile from "./pages/UserProfile";
+import PlaylistDetail from "./pages/PlaylistDetail";
 import { getArtists, type Artist } from "./api/artists";
 import { getTracks, type Track } from "./api/tracks";
 import { ApiError } from "./api/http";
