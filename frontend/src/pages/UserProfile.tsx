@@ -1,9 +1,10 @@
 import "./UserProfile.css";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../auth/session";
+import { clearUser, getUser } from "../auth/session";
 
 const UserProfile = () => {
   const navigate = useNavigate();
+  const user = getUser();
 
   const user = getUser();
 
@@ -27,9 +28,8 @@ const UserProfile = () => {
           </div>
 
           <div className="profile-info">
-            <h1 className="profile-name">{user?.username || "Unknown User"}</h1>
-
-            <p className="profile-email">{user?.email || "No email"}</p>
+            <h1 className="profile-name">{user?.username ?? "Guest"}</h1>
+            <p className="profile-email">{user?.email ?? "Not signed in"}</p>
           </div>
 
           <button className="returnButton" onClick={() => navigate("/")}>

@@ -1,0 +1,52 @@
+.Favorite-title {
+  margin: 0 0 10px;
+}
+
+.Favorite-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.Favorite-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.9;
+}
+
+.Favorite-actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.Favorite-remove {
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  background: transparent;
+  color: var(--text);
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.Favorite-remove:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+
+.Favorite-remove:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+

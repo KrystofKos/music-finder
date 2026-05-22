@@ -1,5 +1,7 @@
 import type { Track } from "../../api/tracks";
 import "./TracksList.css";
+import { usePlayback } from "../../playback/PlaybackContext";
+import { BsPlayCircleFill } from "react-icons/bs";
 
 type Props = {
   tracks: Track[];
@@ -13,6 +15,8 @@ const formatDuration = (seconds: number) => {
 };
 
 export default function TracksList({ tracks, query }: Props) {
+  const { playFromQueue } = usePlayback();
+
   if (!query.trim()) {
     return (
       <div className="TracksList-empty">
@@ -31,7 +35,7 @@ export default function TracksList({ tracks, query }: Props) {
 
   return (
     <div className="TracksList">
-      {tracks.map((track) => (
+      {tracks.map((track, index) => (
         <article key={track.id} className="TrackCard">
           <img
             className="TrackCard-img"
@@ -72,12 +76,14 @@ export default function TracksList({ tracks, query }: Props) {
             </div>
 
             {track.preview ? (
-              <audio
-                className="TrackCard-audio"
-                controls
-                preload="none"
-                src={track.preview}
-              />
+              <button
+                type="button"
+                className="TrackCard-play"
+                onClick={() => playFromQueue(tracks, index)}
+              >
+                <BsPlayCircleFill />
+                <span>Play in player</span>
+              </button>
             ) : (
               <div className="TrackCard-muted">No preview available.</div>
             )}

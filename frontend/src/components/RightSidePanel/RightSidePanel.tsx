@@ -3,7 +3,21 @@ import { VscTriangleRight } from "react-icons/vsc";
 import {HiOutlineDotsVertical } from "react-icons/hi";
 import Images from "../../../images/TemplateImages.png";
 import "./RightSidePanel.css";
+import { usePlayback } from "../../playback/PlaybackContext";
+
+function formatAgo(msAgo: number) {
+  const seconds = Math.max(0, Math.floor(msAgo / 1000));
+  if (seconds < 60) return `${seconds}s ago`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+
 export default function RightSidePanel() {
+  const { recentlyPlayed, playTrack } = usePlayback();
   return (
     <div className="right-side-panel">
       <div className="user-header">
@@ -92,90 +106,47 @@ export default function RightSidePanel() {
       <h2>Recently Played</h2>
       <div className="section-scroll recent-played-scroll">
         <ul className="recent-list">
-          <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Miss You" />
-              <div className="artist-info-text">
-                <h3>Miss You</h3>
+          {recentlyPlayed.length === 0 ? (
+            <li>
+              <div className="artist-info">
+                <div className="artist-info-left">
+                  <div className="artist-info-text">
+                    <h3>Nothing yet</h3>
+                    <p>Play a track to see history.</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">5m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Golden Hour" />
-              <div className="artist-info-text">
-                <h3>Golden Hour</h3>
-              </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">8m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Unholy" />
-              <div className="artist-info-text">
-                <h3>Unholy</h3>
-              </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">10m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Cuff it" />
-              <div className="artist-info-text">
-                <h3>Cuff it</h3>
-              </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">40m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="Jingle Bells" />
-              <div className="artist-info-text">
-                <h3>Jingle Bells</h3>
-              </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">45m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
-        <li>
-          <div className="artist-info">
-            <div className="artist-info-left">
-              <img src={Images} alt="All Mine" />
-              <div className="artist-info-text">
-                <h3>All Mine</h3>
-              </div>
-            </div>
-            <div className="recent-meta">
-              <p className="recent-time">49m ago</p>
-              <VscTriangleRight className="recent-icon" />
-            </div>
-          </div>
-        </li>
+            </li>
+          ) : (
+            recentlyPlayed.map((item) => (
+              <li key={item.track.id}>
+                <div className="artist-info">
+                  <div className="artist-info-left">
+                    <img
+                      src={item.track.album?.cover ?? item.track.artist?.picture ?? Images}
+                      alt={item.track.title}
+                    />
+                    <div className="artist-info-text">
+                      <h3>{item.track.title}</h3>
+                      <p>{item.track.artist?.name ?? "Unknown artist"}</p>
+                    </div>
+                  </div>
+                  <div className="recent-meta">
+                    <p className="recent-time">{formatAgo(Date.now() - item.playedAt)}</p>
+                    <button
+                      type="button"
+                      className="recent-play"
+                      onClick={() => playTrack(item.track)}
+                      aria-label="Play"
+                      title="Play"
+                    >
+                      <VscTriangleRight className="recent-icon" />
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))
+          )}
       </ul>
       </div>
     </div>

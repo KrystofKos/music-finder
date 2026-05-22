@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../api/auth";
+import { ApiError } from "../../api/http";
 import { saveUser } from "../../auth/session";
 
 export default function SignUp() {
@@ -27,8 +28,12 @@ export default function SignUp() {
       const user = await register({ email, username, password });
       saveUser(user);
       close();
-    } catch {
-      setError("Registration failed. Try another email.");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(`API error ${err.status}`);
+      } else {
+        setError("Registration failed. Try another email.");
+      }
     } finally {
       setIsSubmitting(false);
     }

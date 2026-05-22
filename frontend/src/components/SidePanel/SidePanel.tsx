@@ -33,7 +33,7 @@ export default function SidePanel() {
           <Link to="/profile">
             <div
               className={`Sidepanel-List-Item ${active === "Profile" ? "active" : ""}`}
-              onClick={() => handleClick("Profileo")}
+              onClick={() => handleClick("Profile")}
             >
               <VscAccount className="item-icon" />
               <span className="item-text">Profile</span>

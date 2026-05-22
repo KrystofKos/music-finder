@@ -121,6 +121,25 @@
   flex-shrink: 0;
 }
 
+.recent-play {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.recent-play:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
 .artist-info p {
   color: #c7d8c5;
   font-size: 0.92rem;
