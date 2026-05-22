@@ -69,6 +69,7 @@
   flex-shrink: 0;
 }
 
+/* Základní styl pro klikatelné ikony */
 .btn-icon {
   background: none;
   border: none;
@@ -78,27 +79,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease, color 0.2s ease;
 }
 
 .btn-icon:hover {
-  opacity: 0.7;
+  transform: scale(1.15);
+  opacity: 0.8;
 }
 
-/* Aktivní ikona (Repeat) */
+/* Aktivní svítící fialový stav s neonovým zářením */
 .btn-icon-active {
   background: none;
   border: none;
   color: #b300b3;
-  font-size: 16px;
+  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 5px #b300b3);
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0 0 6px #b300b3);
 }
 
-/* Hlavní kulaté tlačítko Play/Pause */
+.btn-icon-active:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 10px #b300b3);
+}
+
+/* Hlavní kulateté tlačítko Play/Pause uprostřed */
 .btn-play-pause {
   background: none;
   border: none;
@@ -116,7 +124,7 @@
   filter: drop-shadow(0 0 6px #b300b3);
 }
 
-/* --- CHYTRÉ SLIDERY (Dlouhá osa) --- */
+/* --- SLIDERY (Časová osa a hlasitost) --- */
 .player-slider-container {
   display: flex;
   align-items: center;
@@ -153,7 +161,7 @@
   background: transparent;
 }
 
-/* Tmavě šedé pozadí pro neodehranou část lišty */
+/* Tmavé pozadí lišty */
 .slider-wrapper::before, .volume-slider-wrapper::before {
   content: '';
   position: absolute;
@@ -165,7 +173,7 @@
   z-index: 0;
 }
 
-/* Svítící fialová čára odehraného progressu */
+/* Fialový progress odehrané části */
 .slider-progress, .volume-progress {
   position: absolute;
   left: 0;
@@ -177,7 +185,7 @@
   pointer-events: none;
 }
 
-/* Posuvné fialové kolečko (Thumb) */
+/* Posuvné kolečko (Thumb) */
 .player-slider::-webkit-slider-thumb, .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -204,7 +212,7 @@
   z-index: 4;
 }
 
-/* --- PRAVÁ ČÁST: Hlasitost a doplňky --- */
+/* --- PRAVÁ ČÁST: Kontejner pro doplňky --- */
 .player-options {
   display: flex;
   align-items: center;
