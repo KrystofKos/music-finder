@@ -1,22 +1,16 @@
-
-
-/* MAIN CARD */
 .profile-card {
   width: 100%;
   max-width: 1100px;
 
   background: #121212;
 
-  border-radius: 24px;
+  border-radius: 18px;
 
   padding: 35px;
-
-  border: 1px solid #2a2a2a;
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* HEADER */
 .profile-header {
   display: flex;
   align-items: center;
@@ -30,7 +24,6 @@
   flex-wrap: wrap;
 }
 
-/* AVATAR */
 .profile-avatar {
   width: 130px;
   height: 130px;
@@ -44,7 +37,6 @@
   box-shadow: 0 0 25px rgba(181, 23, 158, 0.3);
 }
 
-/* INFO */
 .profile-info {
   display: flex;
   flex-direction: column;
@@ -68,7 +60,6 @@
   font-size: 1rem;
 }
 
-/* RETURN BUTTON */
 .returnButton {
   margin-left: auto;
 
@@ -93,7 +84,6 @@
   transform: translateY(-1px);
 }
 
-/* BLOCK */
 .profile-block {
   border-radius: 18px;
 
@@ -106,7 +96,6 @@
   margin-bottom: 24px;
 }
 
-/* SECTION HEADER */
 .profile-section {
   padding: 16px 20px;
 
@@ -122,7 +111,6 @@
   color: #ffffff;
 }
 
-/* SUB SECTION */
 .profile-sub-section {
   padding: 22px 20px;
 
@@ -139,7 +127,6 @@
   color: #cfcfcf;
 }
 
-/* ACTIONS */
 .profile-actions {
   display: flex;
   gap: 14px;
@@ -149,7 +136,6 @@
   flex-wrap: wrap;
 }
 
-/* BUTTONS */
 .edit-button,
 .logout-button {
   padding: 12px 20px;
@@ -166,7 +152,6 @@
   font-size: 0.95rem;
 }
 
-/* EDIT */
 .edit-button {
   background: linear-gradient(135deg, #b5179e, #7209b7);
   color: #ffffff;
@@ -177,7 +162,6 @@
   transform: translateY(-1px);
 }
 
-/* LOGOUT */
 .logout-button {
   background: #2a2a2a;
   color: #ffffff;
@@ -187,7 +171,6 @@
   background: #3a3a3a;
 }
 
-/* MOBILE */
 @media (max-width: 900px) {
   .UserProfile {
     padding: 20px;
