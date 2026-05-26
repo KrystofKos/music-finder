@@ -83,14 +83,50 @@
   opacity: 0.85;
 }
 
-.TrackCard-audio {
+.TrackCard-play {
   margin-top: 10px;
-  width: 100%;
-  height: 32px;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  background: color-mix(in oklab, var(--panel) 65%, black);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.TrackCard-play:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--border));
+}
+
+.TrackCard-play:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+.TrackCard-play > svg {
+  flex: 0 0 auto;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.TrackCard-play > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .TrackCard-muted {
   margin-top: 10px;
   opacity: 0.7;
 }
-

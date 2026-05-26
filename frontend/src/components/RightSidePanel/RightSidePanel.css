@@ -1,0 +1,278 @@
+.right-side-panel {
+  grid-area: rightpanel;
+  position: sticky;
+  top: 0;
+  width: 348px;
+  height: 100vh;
+  background-color: #111111;
+  color: #bfe0d1;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.right-side-panel li {
+  height: 58px;
+  display: flex;
+  align-items: center;
+}
+
+.right-side-panel ul {
+  
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.user-header-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-header-text h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #ffffff;
+}
+
+.user-header-text p {
+  margin: 4px 0 0;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.user-header-bell {
+  margin-left: auto;
+  color: #c7d8c5;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.artist-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 280px;
+  height: 58px;
+}
+
+.artist-info-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.artist-info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-info-text h3 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.recent-list .artist-info-left {
+  align-items: center;
+}
+
+.recent-list .artist-info-text h3 {
+  margin: 0;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: initial;
+  word-break: break-word;
+}
+
+.recent-meta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  width: 86px;
+  flex-shrink: 0;
+  min-height: 24px;
+}
+
+.recent-time {
+  margin: 0;
+  color: #c7d8c5;
+  font-size: 0.82rem;
+  line-height: 24px;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.recent-icon {
+  display: block;
+  color: #c7d8c5;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.recent-play {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.recent-play:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+.artist-info p {
+  color: #c7d8c5;
+  font-size: 0.92rem;
+}
+
+.artist-info-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+.dots-icon {
+  color: #c7d8c5;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  .right-side-panel {
+    position: static;
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+}
+
+.right-side-panel h2 {
+  margin-top: 0;
+  color: #d1d1d1;
+}
+
+.right-side-panel .user-header-text h2 {
+  color: #ffffff;
+}
+
+.right-side-panel ul {
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.section-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0;
+  margin-bottom: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.section-scroll::-webkit-scrollbar-track {
+  background: rgba(162, 115, 205, 0.12);
+  border-radius: 10px;
+}
+
+.section-scroll::-webkit-scrollbar-thumb {
+  background: rgba(162, 115, 205, 0.5);
+  border-radius: 10px;
+}
+
+.section-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(162, 115, 205, 0.7);
+}
+
+.section-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(162, 115, 205, 0.5) rgba(162, 115, 205, 0.12);
+}
+
+.top-artist-scroll {
+  max-height: 240px;
+}
+
+.recent-played-scroll {
+  max-height: 260px;
+}
+
+.right-side-panel ul li {
+  margin-bottom: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.right-side-panel ul li:last-child {
+  margin-bottom: 0;
+}
+
+.right-side-panel ul li > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.right-side-panel ul li img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.right-side-panel ul li div > div {
+  min-width: 0;
+}
+
+.right-side-panel h3 {
+  font-size: 16px;
+}
+
+.right-side-panel ul li p {
+  margin: 4px 0 0;
+  color: #c7d8c5;
+  font-size: 12px;
+}
+
+.right-side-panel .section {
+  margin-bottom: 20px;
+}
+
+.right-side-panel .section h3 {
+  margin-bottom: 10px;
+}
+.right-side-panel .section p {
+  margin: 0;
+}

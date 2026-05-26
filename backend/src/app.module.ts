@@ -1,15 +1,31 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ChatModule } from './chat/chat.module';
 import { UsersModule } from './users/users.module';
+import { ArtistsModule } from './artists/artists.module';
+import { TracksModule } from './tracks/tracks.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
-    // MongoDB běží POUZE pro uživatele
-    MongooseModule.forRoot('mongodb+srv://simon:Simon1234@cluster0.sfkoemu.mongodb.net/music-finder?retryWrites=true&w=majority'),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    
+
+MongooseModule.forRootAsync({
+  imports: [ConfigModule],
+  useFactory: async (configService: ConfigService) => ({
+    uri: configService.get<string>('MONGO_URL'),
+  }),
+  inject: [ConfigService],
+}),
+
     UsersModule,
-    // ChatModule importujeme samostatně, aby se na něj nevztahovala databáze
-    ChatModule,
+    ArtistsModule,
+    TracksModule,
+    DashboardModule,
   ],
 })
 export class AppModule {}
