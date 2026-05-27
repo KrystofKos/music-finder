@@ -4,17 +4,20 @@ import "./Favorite.css";
 import "../components/TracksList/TracksList.css";
 import { getUser } from "../auth/session";
 import { Link } from "react-router-dom";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Favorite() {
+  const { t } = useLanguage();
   const user = getUser();
   const { favorites, playFromQueue, removeFavorite } = usePlayback();
 
   if (!user) {
     return (
       <div className="Favorite">
-        <h1 className="Favorite-title">Favorite</h1>
+        <h1 className="Favorite-title">{t("favorite.title")}</h1>
         <div className="TracksList-empty">
-          Sign in to see your favorites. <Link to="/signin">Sign In</Link>
+          {t("favorite.signInMessage")}{" "}
+          <Link to="/signin">{t("auth.signIn")}</Link>
         </div>
       </div>
     );
@@ -23,8 +26,8 @@ export default function Favorite() {
   if (favorites.length === 0) {
     return (
       <div className="Favorite">
-        <h1 className="Favorite-title">Favorite</h1>
-        <div className="TracksList-empty">No favorite tracks yet.</div>
+        <h1 className="Favorite-title">{t("favorite.title")}</h1>
+        <div className="TracksList-empty">{t("favorite.noFavorites")}</div>
       </div>
     );
   }
@@ -32,7 +35,7 @@ export default function Favorite() {
   return (
     <div className="Favorite">
       <div className="Favorite-header">
-        <h1 className="Favorite-title">Favorite</h1>
+        <h1 className="Favorite-title">{t("favorite.title")}</h1>
         <div className="Favorite-count">
           <BsHeartFill />
           <span>{favorites.length}</span>
@@ -70,7 +73,9 @@ export default function Favorite() {
                     {track.artist.name}
                   </a>
                 ) : (
-                  <span className="TrackCard-artist">{`Unknown artist`}</span>
+                  <span className="TrackCard-artist">
+                    {t("common.unknownArtist")}
+                  </span>
                 )}
                 {track.album?.title ? (
                   <span className="TrackCard-album"> • {track.album.title}</span>
@@ -85,14 +90,14 @@ export default function Favorite() {
                   disabled={!track.preview}
                 >
                   <BsPlayCircleFill />
-                  <span>Play in player</span>
+                  <span>{t("common.playInPlayer")}</span>
                 </button>
                 <button
                   type="button"
                   className="Favorite-remove"
                   onClick={() => removeFavorite(track.id)}
-                  aria-label="Remove from favorites"
-                  title="Remove from favorites"
+                  aria-label={t("favorite.remove")}
+                  title={t("favorite.remove")}
                 >
                   <BsTrash3 />
                 </button>

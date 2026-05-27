@@ -7,6 +7,7 @@ import {
   getDashboardPlaylistTracksPage,
 } from "../api/dashboard";
 import { usePlayback } from "../playback/PlaybackContext";
+import { useLanguage } from "../i18n/LanguageContext";
 import "../components/TracksList/TracksList.css";
 
 export default function Playlist() {
@@ -15,8 +16,9 @@ export default function Playlist() {
   const playlistId = Number(id);
 
   const { playFromQueue } = usePlayback();
+  const { t } = useLanguage();
 
-  const [title, setTitle] = useState<string>("Playlist");
+  const [title, setTitle] = useState<string>(t("playlist.title"));
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -34,13 +36,13 @@ export default function Playlist() {
     getDashboardPlaylists(controller.signal)
       .then((pls) => {
         const found = pls.find((p) => p.id === playlistId);
-        setTitle(found?.title ?? "Playlist");
+        setTitle(found?.title ?? t("playlist.title"));
       })
       .catch(() => {
         // ignore: keep default title
       });
     return () => controller.abort();
-  }, [playlistId, valid]);
+  }, [playlistId, t, valid]);
 
   useEffect(() => {
     if (!valid) return;
@@ -70,7 +72,7 @@ export default function Playlist() {
         setPageIndex((p) => p + 1);
         setHasMore(next.length === pageSize);
       })
-      .catch(() => setError("Failed to load playlist tracks"))
+      .catch(() => setError(t("playlist.loadError")))
       .finally(() => setLoading(false));
   };
 
@@ -102,8 +104,8 @@ export default function Playlist() {
   if (!valid) {
     return (
       <div>
-        <h1 style={{ margin: 0 }}>Playlist</h1>
-        <p style={{ marginTop: 10 }}>Invalid playlist id.</p>
+        <h1 style={{ margin: 0 }}>{t("playlist.title")}</h1>
+        <p style={{ marginTop: 10 }}>{t("playlist.invalid")}</p>
       </div>
     );
   }
@@ -113,7 +115,7 @@ export default function Playlist() {
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <h1 style={{ margin: 0 }}>{title}</h1>
         <button className="returnButton" onClick={() => navigate("/dashboard")}>
-          <FaArrowLeftLong /> Back
+          <FaArrowLeftLong /> {t("common.back")}
         </button>
         {canPlay ? (
           <button
@@ -121,12 +123,12 @@ export default function Playlist() {
             className="authorization_button"
             onClick={() => playFromQueue(tracks, 0)}
           >
-            Play all
+            {t("playlist.playAll")}
           </button>
         ) : null}
       </div>
 
-      {loading ? <p style={{ marginTop: 10 }}>Loading...</p> : null}
+      {loading ? <p style={{ marginTop: 10 }}>{t("common.loading")}</p> : null}
       {error ? <p style={{ marginTop: 10 }}>{error}</p> : null}
 
       <div className="TracksList">
@@ -160,7 +162,9 @@ export default function Playlist() {
                     {track.artist.name}
                   </a>
                 ) : (
-                  <span className="TrackCard-artist">{`Unknown artist`}</span>
+                  <span className="TrackCard-artist">
+                    {t("common.unknownArtist")}
+                  </span>
                 )}
                 {track.album?.title ? (
                   <span className="TrackCard-album"> • {track.album.title}</span>
@@ -173,10 +177,10 @@ export default function Playlist() {
                   className="TrackCard-play"
                   onClick={() => playFromQueue(tracks, index)}
                 >
-                  <span>Play in player</span>
+                  <span>{t("common.playInPlayer")}</span>
                 </button>
               ) : (
-                <div className="TrackCard-muted">No preview available.</div>
+                <div className="TrackCard-muted">{t("common.noPreview")}</div>
               )}
             </div>
           </article>
@@ -185,10 +189,12 @@ export default function Playlist() {
 
       <div ref={loaderRef} style={{ height: 1 }} />
       {loading && tracks.length > 0 ? (
-        <p style={{ marginTop: 10 }}>Loading more...</p>
+        <p style={{ marginTop: 10 }}>{t("common.loadingMore")}</p>
       ) : null}
       {!hasMore && tracks.length > 0 ? (
-        <p style={{ marginTop: 10, opacity: 0.7 }}>No more tracks.</p>
+        <p style={{ marginTop: 10, opacity: 0.7 }}>
+          {t("common.noMoreTracks")}
+        </p>
       ) : null}
     </div>
   );

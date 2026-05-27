@@ -6,20 +6,22 @@ import "./RightSidePanel.css";
 import { usePlayback } from "../../playback/PlaybackContext";
 import { getUser, onUserChange } from "../../auth/session";
 import { useEffect, useMemo, useState } from "react";
+import { useLanguage } from "../../i18n/LanguageContext";
 
-function formatAgo(msAgo: number) {
+function formatAgo(msAgo: number, t: ReturnType<typeof useLanguage>["t"]) {
   const seconds = Math.max(0, Math.floor(msAgo / 1000));
-  if (seconds < 60) return `${seconds}s ago`;
+  if (seconds < 60) return t("rightPanel.secondsAgo", { count: seconds });
   const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return t("rightPanel.minutesAgo", { count: minutes });
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
+  if (hours < 24) return t("rightPanel.hoursAgo", { count: hours });
   const days = Math.floor(hours / 24);
-  return `${days}d ago`;
+  return t("rightPanel.daysAgo", { count: days });
 }
 
 export default function RightSidePanel() {
   const { recentlyPlayed, playTrack } = usePlayback();
+  const { t } = useLanguage();
   const [user, setUser] = useState(() => getUser());
 
   useEffect(() => onUserChange(() => setUser(getUser())), []);
@@ -56,12 +58,12 @@ export default function RightSidePanel() {
       <div className="user-header">
         <img src={Images} alt="Tarisa" className="user-header-img" />
         <div className="user-header-text">
-          <h2>{user?.username ?? "Guest"}</h2>
-          <p>{user?.email ?? "Not signed in"}</p>
+          <h2>{user?.username ?? t("common.guest")}</h2>
+          <p>{user?.email ?? t("common.notSignedIn")}</p>
         </div>
         <CiBellOn className="user-header-bell" />
       </div>
-      <h2>Top Artist</h2>
+      <h2>{t("rightPanel.topArtist")}</h2>
       <div className="section-scroll top-artist-scroll">
         <ul>
           {topArtists.length === 0 ? (
@@ -69,8 +71,8 @@ export default function RightSidePanel() {
               <div className="artist-info">
                 <div className="artist-info-left">
                   <div className="artist-info-text">
-                    <h3>No data yet</h3>
-                    <p>Play some tracks first.</p>
+                    <h3>{t("rightPanel.noData")}</h3>
+                    <p>{t("rightPanel.playTracksFirst")}</p>
                   </div>
                 </div>
               </div>
@@ -83,7 +85,7 @@ export default function RightSidePanel() {
                     <img src={a.picture ?? Images} alt={a.name} />
                     <div className="artist-info-text">
                       <h3>{a.name}</h3>
-                      <p>{a.plays} plays</p>
+                      <p>{t("rightPanel.plays", { count: a.plays })}</p>
                     </div>
                   </div>
                   <div className="artist-info-right">
@@ -95,7 +97,7 @@ export default function RightSidePanel() {
           )}
       </ul>
       </div>
-      <h2>Recently Played</h2>
+      <h2>{t("rightPanel.recentlyPlayed")}</h2>
       <div className="section-scroll recent-played-scroll">
         <ul className="recent-list">
           {recentlyPlayed.length === 0 ? (
@@ -103,8 +105,8 @@ export default function RightSidePanel() {
               <div className="artist-info">
                 <div className="artist-info-left">
                   <div className="artist-info-text">
-                    <h3>Nothing yet</h3>
-                    <p>Play a track to see history.</p>
+                    <h3>{t("rightPanel.nothingYet")}</h3>
+                    <p>{t("rightPanel.playHistory")}</p>
                   </div>
                 </div>
               </div>
@@ -120,17 +122,19 @@ export default function RightSidePanel() {
                     />
                     <div className="artist-info-text">
                       <h3>{item.track.title}</h3>
-                      <p>{item.track.artist?.name ?? "Unknown artist"}</p>
+                      <p>{item.track.artist?.name ?? t("common.unknownArtist")}</p>
                     </div>
                   </div>
                   <div className="recent-meta">
-                    <p className="recent-time">{formatAgo(Date.now() - item.playedAt)}</p>
+                    <p className="recent-time">
+                      {formatAgo(Date.now() - item.playedAt, t)}
+                    </p>
                     <button
                       type="button"
                       className="recent-play"
                       onClick={() => playTrack(item.track)}
-                      aria-label="Play"
-                      title="Play"
+                      aria-label={t("common.play")}
+                      title={t("common.play")}
                     >
                       <VscTriangleRight className="recent-icon" />
                     </button>

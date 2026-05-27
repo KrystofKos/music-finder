@@ -15,8 +15,10 @@ import {
   BsShare,
 } from "react-icons/bs";
 import { usePlayback } from "../../playback/PlaybackContext";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 export default function PlayBack() {
+  const { t } = useLanguage();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const {
     currentTrack,
@@ -59,7 +61,7 @@ export default function PlayBack() {
   };
 
   const handleShare = () => {
-    alert("Odkaz na písničku byl zkopírován do schránky!");
+    alert(t("playback.shareCopied"));
   };
 
   useEffect(() => {
@@ -152,7 +154,7 @@ export default function PlayBack() {
     currentTrack?.artist?.picture ??
     "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=200&auto=format&fit=crop";
 
-  const title = currentTrack?.title ?? "No track selected";
+  const title = currentTrack?.title ?? t("playback.noTrack");
   const artist = currentTrack?.artist?.name ?? "—";
 
   return (
@@ -161,7 +163,7 @@ export default function PlayBack() {
 
       <div className="player-track-info">
         <div className="track-cover-wrapper">
-          <img src={coverSrc} alt="Cover" className="track-cover" />
+          <img src={coverSrc} alt={t("playback.cover")} className="track-cover" />
         </div>
         <div className="track-text">
           <h4 className="track-title">{title}</h4>

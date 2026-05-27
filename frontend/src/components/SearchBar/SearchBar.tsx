@@ -1,3 +1,4 @@
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./SearchBar.css";
 
 type Props = {
@@ -13,17 +14,21 @@ export default function SearchBar({
   foundCount,
   loading = false,
 }: Props) {
+  const { t } = useLanguage();
+
   return (
     <div className="Searchbar">
       <input
-        placeholder="Search for artists or tracks..."
+        placeholder={t("search.placeholder")}
         className="Searchbar-input"
         autoFocus
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
       />
       <p className="ArtistCount">
-        {loading ? "Searching…" : `Found ${foundCount}`}
+        {loading
+          ? t("search.searching")
+          : t("search.found", { count: foundCount })}
       </p>
     </div>
   );

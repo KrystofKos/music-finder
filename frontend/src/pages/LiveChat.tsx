@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useChat } from "../api/useChat";
 import { getUser } from "../auth/session";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./LiveChat.css";
 
 function formatTime(value: string) {
@@ -19,6 +20,7 @@ function formatTime(value: string) {
 
 function LiveChat() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const currentUser = getUser();
 
   const [conversationsCollapsed, setConversationsCollapsed] = useState(false);
@@ -103,7 +105,7 @@ function LiveChat() {
     >
       <aside className="Sidebar">
         <div className="SidebarHeader">
-          <h1 className="Title">Live Chat</h1>
+          <h1 className="Title">{t("liveChat.title")}</h1>
         </div>
 
         <div className="ConversationList">
@@ -128,13 +130,13 @@ function LiveChat() {
             onClick={() => setConversationsCollapsed((current) => !current)}
             aria-label={
               conversationsCollapsed
-                ? "Show conversations"
-                : "Hide conversations"
+                ? t("liveChat.showConversations")
+                : t("liveChat.hideConversations")
             }
             title={
               conversationsCollapsed
-                ? "Show conversations"
-                : "Hide conversations"
+                ? t("liveChat.showConversations")
+                : t("liveChat.hideConversations")
             }
           >
             {conversationsCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
@@ -150,7 +152,7 @@ function LiveChat() {
             type="button"
             onClick={() => navigate("/")}
           >
-            <FaArrowLeftLong /> Back
+            <FaArrowLeftLong /> {t("common.back")}
           </button>
         </header>
 

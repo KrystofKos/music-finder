@@ -8,14 +8,14 @@
   left: 0;
   width: 100%;
   height: var(--playback-height);
-  background-color: #111111;
-  border-top: 1px solid #222222;
+  background-color: var(--surface-alt);
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 32px;
   box-sizing: border-box;
-  color: #ffffff;
+  color: var(--text-strong);
   font-family: sans-serif;
   z-index: 9999;
 }
@@ -30,8 +30,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 2px solid #b300b3;
-  box-shadow: 0 0 12px rgba(179, 0, 179, 0.6);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 12px var(--accent-shadow);
   overflow: hidden;
   margin-right: 12px;
 }
@@ -51,7 +51,7 @@
 .track-text .track-artist {
   margin: 0;
   font-size: 11px;
-  color: #8e8e8e;
+  color: var(--muted);
 }
 
 .player-controls-wrapper {
@@ -73,7 +73,7 @@
 .btn-icon {
   background: none;
   border: none;
-  color: #ffffff;
+  color: var(--text-strong);
   font-size: 20px;
   cursor: pointer;
   display: flex;
@@ -93,7 +93,7 @@
 .btn-icon-active {
   background: none;
   border: none;
-  color: #b300b3;
+  color: var(--accent);
   font-size: 20px;
   cursor: pointer;
   display: flex;
@@ -102,18 +102,18 @@
   transition:
     transform 0.2s ease,
     filter 0.2s ease;
-  filter: drop-shadow(0 0 6px #b300b3);
+  filter: drop-shadow(0 0 6px var(--accent));
 }
 
 .btn-icon-active:hover {
   transform: scale(1.15);
-  filter: drop-shadow(0 0 10px #b300b3);
+  filter: drop-shadow(0 0 10px var(--accent));
 }
 
 .btn-play-pause {
   background: none;
   border: none;
-  color: #b300b3;
+  color: var(--accent);
   font-size: 34px;
   cursor: pointer;
   display: flex;
@@ -126,7 +126,7 @@
 
 .btn-play-pause:hover {
   transform: scale(1.08);
-  filter: drop-shadow(0 0 6px #b300b3);
+  filter: drop-shadow(0 0 6px var(--accent));
 }
 
 .player-slider-container {
@@ -138,7 +138,7 @@
 
 .time {
   font-size: 11px;
-  color: #555555;
+  color: var(--disabled);
   min-width: 35px;
   font-variant-numeric: tabular-nums;
 }
@@ -174,7 +174,7 @@
   left: 0;
   width: 100%;
   height: 5px;
-  background: #252525;
+  background: var(--track);
   border-radius: 3px;
   z-index: 0;
 }
@@ -184,10 +184,10 @@
   position: absolute;
   left: 0;
   height: 5px;
-  background: #b300b3;
+  background: var(--accent);
   border-radius: 3px;
   z-index: 1;
-  box-shadow: 0 0 8px rgba(179, 0, 179, 0.7);
+  box-shadow: 0 0 8px var(--accent-shadow);
   pointer-events: none;
 }
 
@@ -198,10 +198,10 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #b300b3;
-  border: 1px solid #ffffff;
+  background: var(--accent);
+  border: 1px solid var(--text-strong);
   cursor: pointer;
-  box-shadow: 0 0 6px #b300b3;
+  box-shadow: 0 0 6px var(--accent);
   position: relative;
   z-index: 4;
 }
@@ -211,10 +211,10 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #b300b3;
-  border: 1px solid #ffffff;
+  background: var(--accent);
+  border: 1px solid var(--text-strong);
   cursor: pointer;
-  box-shadow: 0 0 6px #b300b3;
+  box-shadow: 0 0 6px var(--accent);
   position: relative;
   z-index: 4;
 }

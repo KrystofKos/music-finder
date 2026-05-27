@@ -23,6 +23,8 @@ import FaQs from "./pages/FaQs";
 import { PlaybackProvider } from "./playback/PlaybackContext";
 import Playlist from "./pages/Playlist";
 import TopMusic from "./pages/TopMusic";
+import { ThemeProvider } from "./theme/ThemeContext";
+import { LanguageProvider } from "./i18n/LanguageContext";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -110,48 +112,52 @@ function App() {
 
   return (
     <BrowserRouter>
-      <PlaybackProvider>
-        <div className="wrapper">
-          <PlayBack />
-          <SidePanel />
-          <main className="Main">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <SearchBar
-                      query={query}
-                      onQueryChange={setQuery}
-                      foundCount={artists.length + tracks.length}
-                      loading={loading}
-                    />
+      <ThemeProvider>
+        <LanguageProvider>
+          <PlaybackProvider>
+            <div className="wrapper">
+              <PlayBack />
+              <SidePanel />
+              <main className="Main">
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <>
+                        <SearchBar
+                          query={query}
+                          onQueryChange={setQuery}
+                          foundCount={artists.length + tracks.length}
+                          loading={loading}
+                        />
 
-                    {error ? <p style={{ marginTop: 10 }}>{error}</p> : null}
+                        {error ? <p style={{ marginTop: 10 }}>{error}</p> : null}
 
-                    <TracksList tracks={tracks} query={query} />
+                        <TracksList tracks={tracks} query={query} />
 
-                    <ArtistsList artists={artists} query={query} />
-                  </>
-                }
-              />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/signin" element={<SignIn />} />
-              <Route path="/profile" element={<UserProfile />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/favorite" element={<Favorite />} />
-              <Route path="/friends" element={<Friends />} />
-              <Route path="/livechat" element={<LiveChat />} />
-              <Route path="/mobileapp" element={<MobileApp />} />
-              <Route path="/settings" element={<Settings />} />
-              <Route path="/faqs" element={<FaQs />} />
-              <Route path="/playlist/:id" element={<Playlist />} />
-              <Route path="/topmusic" element={<TopMusic />} />
-            </Routes>
-          </main>
-          <RightSidePanel />
-        </div>
-      </PlaybackProvider>
+                        <ArtistsList artists={artists} query={query} />
+                      </>
+                    }
+                  />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/favorite" element={<Favorite />} />
+                  <Route path="/friends" element={<Friends />} />
+                  <Route path="/livechat" element={<LiveChat />} />
+                  <Route path="/mobileapp" element={<MobileApp />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/faqs" element={<FaQs />} />
+                  <Route path="/playlist/:id" element={<Playlist />} />
+                  <Route path="/topmusic" element={<TopMusic />} />
+                </Routes>
+              </main>
+              <RightSidePanel />
+            </div>
+          </PlaybackProvider>
+        </LanguageProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

@@ -2,6 +2,7 @@ import type { Track } from "../../api/tracks";
 import "./TracksList.css";
 import { usePlayback } from "../../playback/PlaybackContext";
 import { BsPlayCircleFill } from "react-icons/bs";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 type Props = {
   tracks: Track[];
@@ -16,21 +17,18 @@ const formatDuration = (seconds: number) => {
 
 export default function TracksList({ tracks, query }: Props) {
   const { playFromQueue } = usePlayback();
+  const { t } = useLanguage();
 
   if (!query.trim()) {
-    return (
-      <div className="TracksList-empty">
-        Type something to search tracks.
-      </div>
-    );
+    return <div className="TracksList-empty">{t("search.typeTracks")}</div>;
   }
 
   if (!Array.isArray(tracks)) {
-    return <div className="TracksList-empty">Unexpected response.</div>;
+    return <div className="TracksList-empty">{t("search.unexpected")}</div>;
   }
 
   if (tracks.length === 0) {
-    return <div className="TracksList-empty">No tracks found.</div>;
+    return <div className="TracksList-empty">{t("search.noTracks")}</div>;
   }
 
   return (
@@ -68,7 +66,9 @@ export default function TracksList({ tracks, query }: Props) {
                   {track.artist.name}
                 </a>
               ) : (
-                <span className="TrackCard-artist">{`Unknown artist`}</span>
+                <span className="TrackCard-artist">
+                  {t("common.unknownArtist")}
+                </span>
               )}
               {track.album?.title ? (
                 <span className="TrackCard-album"> • {track.album.title}</span>
@@ -82,10 +82,10 @@ export default function TracksList({ tracks, query }: Props) {
                 onClick={() => playFromQueue(tracks, index)}
               >
                 <BsPlayCircleFill />
-                <span>Play in player</span>
+                <span>{t("common.playInPlayer")}</span>
               </button>
             ) : (
-              <div className="TrackCard-muted">No preview available.</div>
+              <div className="TrackCard-muted">{t("common.noPreview")}</div>
             )}
           </div>
         </article>

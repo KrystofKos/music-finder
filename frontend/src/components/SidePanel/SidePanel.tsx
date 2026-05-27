@@ -10,7 +10,9 @@ import { CiMobile2 } from "react-icons/ci";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 import Logo from "../../../images/logo.png";
+import { useLanguage } from "../../i18n/LanguageContext";
 export default function SidePanel() {
+  const { t } = useLanguage();
   const [active, setActive] = useState<string>("Profile");
   const handleClick = (name: string) => {
     setActive(name);
@@ -21,12 +23,12 @@ export default function SidePanel() {
       <Link to="/">
         <div className="Sidepanel-Header">
           <img src={Logo} alt="Logo" className="Header-logo" />
-          <h1 className="Header-title">Music Finder</h1>
+          <h1 className="Header-title">{t("common.appName")}</h1>
         </div>
       </Link>
       <div className="Sidepanel-Scroll">
         <div className="Sidepanel-Menu">
-          <h2>Menu</h2>
+          <h2>{t("sidePanel.menu")}</h2>
         </div>
 
         <div className="Sidepanel-List">
@@ -36,7 +38,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Profile")}
             >
               <VscAccount className="item-icon" />
-              <span className="item-text">Profile</span>
+              <span className="item-text">{t("sidePanel.profile")}</span>
             </div>
           </Link>
 
@@ -46,7 +48,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Dashboard")}
             >
               <RxDashboard className="item-icon" />
-              <span className="item-text">Dashboard</span>
+              <span className="item-text">{t("sidePanel.dashboard")}</span>
             </div>
           </Link>
 
@@ -56,7 +58,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Favorite")}
             >
               <RxHeart className="item-icon" />
-              <span className="item-text">Favorite</span>
+              <span className="item-text">{t("sidePanel.favorite")}</span>
             </div>
           </Link>
 
@@ -66,7 +68,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Live Chat")}
             >
               <IoChatboxEllipsesOutline className="item-icon" />
-              <span className="item-text">Live Chat</span>
+              <span className="item-text">{t("sidePanel.liveChat")}</span>
             </div>
           </Link>
 
@@ -76,7 +78,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Friends")}
             >
               <LiaUserFriendsSolid className="item-icon" />
-              <span className="item-text">Friends</span>
+              <span className="item-text">{t("sidePanel.friends")}</span>
             </div>
           </Link>
 
@@ -86,13 +88,13 @@ export default function SidePanel() {
               onClick={() => handleClick("Mobile App")}
             >
               <CiMobile2 className="item-icon" />
-              <span className="item-text">Mobile App</span>
+              <span className="item-text">{t("sidePanel.mobileApp")}</span>
             </div>
           </Link>
         </div>
 
         <div className="Sidepanel-Help">
-          <h2>Help</h2>
+          <h2>{t("sidePanel.help")}</h2>
         </div>
         <div className="Sidepanel-List">
           <Link to="/settings">
@@ -101,7 +103,7 @@ export default function SidePanel() {
               onClick={() => handleClick("Settings")}
             >
               <IoSettingsOutline className="item-icon" />
-              <span className="item-text">Settings</span>
+              <span className="item-text">{t("settings.title")}</span>
             </div>
           </Link>
 
@@ -111,7 +113,7 @@ export default function SidePanel() {
               onClick={() => handleClick("FAQs")}
             >
               <TfiHeadphoneAlt className="item-icon" />
-              <span className="item-text">FAQs</span>
+              <span className="item-text">{t("sidePanel.faqs")}</span>
             </div>
           </Link>
         </div>

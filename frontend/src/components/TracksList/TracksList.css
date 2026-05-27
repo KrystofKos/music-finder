@@ -29,7 +29,7 @@
   object-fit: cover;
   border-radius: 12px;
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
-  background: color-mix(in oklab, var(--panel) 70%, black);
+  background: color-mix(in oklab, var(--panel) 70%, var(--surface));
 }
 
 .TrackCard-body {
@@ -88,7 +88,7 @@
   width: fit-content;
   max-width: 100%;
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
-  background: color-mix(in oklab, var(--panel) 65%, black);
+  background: color-mix(in oklab, var(--panel) 65%, var(--surface));
   color: var(--text);
   border-radius: 999px;
   padding: 8px 12px;
