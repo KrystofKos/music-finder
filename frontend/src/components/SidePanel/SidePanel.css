@@ -1,13 +1,33 @@
 .Sidepanel {
   grid-area: sidepanel;
-  height: 100vh;
+  height: 100dvh;
   padding: 16px;
+  padding-bottom: calc(16px + var(--playback-height, 80px));
   background: var(--surface-alt);
   color: var(--text);
 
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: sticky;
+  top: 0;
+}
+
+.Sidepanel-Scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+}
+
+.Sidepanel-Scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.Sidepanel-Scroll::-webkit-scrollbar-thumb {
+  background: var(--surface-hover);
+  border-radius: 10px;
 }
 
 .Sidepanel-Header {
@@ -136,6 +156,18 @@
 
   .item-icon {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 960px) {
+  .Sidepanel {
+    position: static;
+    height: auto;
+    padding-bottom: 16px;
+  }
+
+  .Sidepanel-Scroll {
+    overflow: visible;
   }
 }
 

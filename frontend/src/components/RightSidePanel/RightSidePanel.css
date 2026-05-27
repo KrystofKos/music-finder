@@ -2,7 +2,7 @@
   grid-area: rightpanel;
   position: sticky;
   top: 0;
-  width: 348px;
+  width: var(--rightpanel-width, 348px);
   height: 100vh;
   background-color: var(--surface-alt);
   color: var(--text);
@@ -59,27 +59,32 @@
 
 .artist-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
   max-width: 280px;
   height: 58px;
+  min-width: 0;
 }
 
 .artist-info-left {
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  flex: 1;
+  min-width: 0;
 }
 
 .artist-info-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .artist-info-text h3 {
   margin: 0;
   color: var(--text-strong);
+  min-width: 0;
 }
 
 .recent-list .artist-info-left {
@@ -89,17 +94,28 @@
 .recent-list .artist-info-text h3 {
   margin: 0;
   white-space: normal;
-  overflow: visible;
-  text-overflow: initial;
-  word-break: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+
+.recent-list .artist-info-text p {
+  margin: 4px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 
 .recent-meta {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
   gap: 6px;
-  width: 86px;
+  width: clamp(86px, 26%, 120px);
   flex-shrink: 0;
   min-height: 24px;
 }

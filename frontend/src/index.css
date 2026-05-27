@@ -1,0 +1,18 @@
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}

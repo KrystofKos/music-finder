@@ -26,6 +26,10 @@
   --input-bg: #ffffff;
   --track: #252525;
   --disabled: #555555;
+  --layout-gap: 0px;
+  --sidepanel-width: clamp(240px, 22vw, 320px);
+  --rightpanel-width: clamp(280px, 26vw, 348px);
+  --main-padding: clamp(12px, 2vw, 20px);
 }
 
 :root[data-theme="light"] {
@@ -78,14 +82,18 @@ body {
   grid-template-areas:
     "sidepanel main rightpanel";
 
-  grid-template-columns: 320px minmax(0, 1fr) 348px;
+  grid-template-columns:
+    var(--sidepanel-width)
+    minmax(0, 1fr)
+    var(--rightpanel-width);
   grid-template-rows: 1fr;
+  gap: var(--layout-gap);
 }
 
 .Main {
   grid-area: main;
-  padding: 20px;
-  padding-bottom: calc(20px + var(--playback-height, 80px));
+  padding: var(--main-padding);
+  padding-bottom: calc(var(--main-padding) + var(--playback-height, 80px));
   overflow: auto;
 }
 
@@ -97,6 +105,16 @@ body {
       "rightpanel";
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
+  }
+
+  .Main {
+    overflow: visible;
+  }
+}
+
+@media (max-width: 600px) {
+  .Main {
+    padding-bottom: calc(12px + var(--playback-height, 80px));
   }
 }
 

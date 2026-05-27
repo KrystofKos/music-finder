@@ -228,7 +228,7 @@ export function PlaybackProvider({ children }: PropsWithChildren) {
     if (!isPlaying) return;
     if (!currentTrack?.preview) return;
     pushRecent(currentTrack);
-  }, [currentTrack?.id, currentTrack?.preview, isPlaying, pushRecent]);
+  }, [currentTrack, isPlaying, pushRecent]);
 
   const value = useMemo<PlaybackContextValue>(
     () => ({

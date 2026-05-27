@@ -16,7 +16,7 @@ import { MongoUsersRepo } from './mongo-users.repo';
     UsersService,
     {
       provide: USERS_REPO,
-      useClass: MongoUsersRepo, 
+      useClass: MongoUsersRepo,
     },
   ],
   exports: [UsersService],
