@@ -2,7 +2,7 @@
   background: var(--surface);
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text-strong);
-  padding: 20px;
+  padding: clamp(14px, 2vw, 20px);
   border-radius: 18px;
 }
 
@@ -10,6 +10,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 .title-left {
@@ -49,6 +51,26 @@
   display: flex;
   justify-content: center;
   gap: 5px;
+}
+
+@media (max-width: 600px) {
+  .title h2 {
+    font-size: 1.45rem;
+  }
+
+  .returnButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .playlist-box {
+    width: 150px;
+    padding: 14px;
+  }
+
+  .playlist-image {
+    height: 140px;
+  }
 }
 
 .returnButton:hover {

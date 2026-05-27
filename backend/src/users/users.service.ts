@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Inject } from '@nestjs/common';
@@ -35,11 +36,25 @@ export class UsersService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const ok = await bcrypt.compare(body.password ?? '', (user as any).password);
+    const ok = await bcrypt.compare(
+      body.password ?? '',
+      (user as any).password,
+    );
     if (!ok) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     return this.usersRepo.toSafeUser(user);
+  }
+
+  async updateAvatar(params: { userId: string; avatar: string | null }) {
+    const updated = await this.usersRepo.updateAvatar(
+      params.userId,
+      params.avatar,
+    );
+    if (!updated) {
+      throw new NotFoundException('User not found');
+    }
+    return this.usersRepo.toSafeUser(updated);
   }
 }

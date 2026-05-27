@@ -1,7 +1,7 @@
 .TracksList {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
 }
 
@@ -30,6 +30,21 @@
   border-radius: 12px;
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
   background: color-mix(in oklab, var(--panel) 70%, var(--surface));
+}
+
+@media (max-width: 420px) {
+  .TracksList {
+    grid-template-columns: 1fr;
+  }
+
+  .TrackCard {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .TrackCard-img {
+    width: 72px;
+    height: 72px;
+  }
 }
 
 .TrackCard-body {

@@ -5,10 +5,7 @@ import { VscAccount } from "react-icons/vsc";
 import { RxDashboard } from "react-icons/rx";
 import { RxHeart } from "react-icons/rx";
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import { LiaUserFriendsSolid } from "react-icons/lia";
-import { CiMobile2 } from "react-icons/ci";
 import { IoSettingsOutline } from "react-icons/io5";
-import { TfiHeadphoneAlt } from "react-icons/tfi";
 import Logo from "../../../images/logo.png";
 import { useLanguage } from "../../i18n/LanguageContext";
 export default function SidePanel() {
@@ -71,26 +68,6 @@ export default function SidePanel() {
               <span className="item-text">{t("sidePanel.liveChat")}</span>
             </div>
           </Link>
-
-          <Link to="friends">
-            <div
-              className={`Sidepanel-List-Item ${active === "Friends" ? "active" : ""}`}
-              onClick={() => handleClick("Friends")}
-            >
-              <LiaUserFriendsSolid className="item-icon" />
-              <span className="item-text">{t("sidePanel.friends")}</span>
-            </div>
-          </Link>
-
-          <Link to="mobileapp">
-            <div
-              className={`Sidepanel-List-Item ${active === "Mobile App" ? "active" : ""}`}
-              onClick={() => handleClick("Mobile App")}
-            >
-              <CiMobile2 className="item-icon" />
-              <span className="item-text">{t("sidePanel.mobileApp")}</span>
-            </div>
-          </Link>
         </div>
 
         <div className="Sidepanel-Help">
@@ -104,16 +81,6 @@ export default function SidePanel() {
             >
               <IoSettingsOutline className="item-icon" />
               <span className="item-text">{t("settings.title")}</span>
-            </div>
-          </Link>
-
-          <Link to="/faqs">
-            <div
-              className={`Sidepanel-List-Item ${active === "FAQs" ? "active" : ""}`}
-              onClick={() => handleClick("FAQs")}
-            >
-              <TfiHeadphoneAlt className="item-icon" />
-              <span className="item-text">{t("sidePanel.faqs")}</span>
             </div>
           </Link>
         </div>

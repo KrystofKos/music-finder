@@ -56,7 +56,11 @@ export default function RightSidePanel() {
   return (
     <div className="right-side-panel">
       <div className="user-header">
-        <img src={Images} alt="Tarisa" className="user-header-img" />
+        <img
+          src={user?.avatar ?? Images}
+          alt={user?.username ?? user?.email ?? t("common.guest")}
+          className="user-header-img"
+        />
         <div className="user-header-text">
           <h2>{user?.username ?? t("common.guest")}</h2>
           <p>{user?.email ?? t("common.notSignedIn")}</p>

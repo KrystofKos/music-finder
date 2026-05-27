@@ -18,4 +18,3 @@ export class TracksController {
     return this.tracksService.findOnDeezer(name);
   }
 }
-

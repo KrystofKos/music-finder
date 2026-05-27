@@ -40,7 +40,10 @@ export class DashboardService {
   ];
 
   getPlaylists() {
-    return this.playlists.map(({ query, ...p }) => p);
+    return this.playlists.map((playlist) => ({
+      id: playlist.id,
+      title: playlist.title,
+    }));
   }
 
   private mapTrack(track: any): DashboardTrack {

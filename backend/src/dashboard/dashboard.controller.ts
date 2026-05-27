@@ -11,7 +11,10 @@ export class DashboardController {
   }
 
   @Get('top-tracks')
-  async getTopTracks(@Query('limit') limit?: string, @Query('index') index?: string) {
+  async getTopTracks(
+    @Query('limit') limit?: string,
+    @Query('index') index?: string,
+  ) {
     const n = limit ? Number(limit) : 3;
     const i = index ? Number(index) : 0;
     return this.dashboardService.getTopTracks(

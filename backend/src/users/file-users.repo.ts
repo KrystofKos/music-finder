@@ -9,6 +9,7 @@ type StoredUser = {
   email: string;
   password: string;
   username?: string;
+  avatar?: string;
 };
 
 function dataFilePath() {
@@ -37,6 +38,12 @@ function toUserDocumentLike(u: StoredUser): User {
 }
 
 export class FileUsersRepo implements UsersRepo {
+  async findById(id: string): Promise<User | null> {
+    const users = await readAll();
+    const found = users.find((u) => u._id === id);
+    return found ? toUserDocumentLike(found) : null;
+  }
+
   async findByEmail(email: string): Promise<User | null> {
     const users = await readAll();
     const found = users.find((u) => u.email === email);
@@ -56,13 +63,26 @@ export class FileUsersRepo implements UsersRepo {
     return toUserDocumentLike(created);
   }
 
+  async updateAvatar(id: string, avatar: string | null): Promise<User | null> {
+    const users = await readAll();
+    const index = users.findIndex((u) => u._id === id);
+    if (index === -1) return null;
+    const updated: StoredUser = {
+      ...users[index],
+      avatar: avatar ?? undefined,
+    };
+    users[index] = updated;
+    await writeAll(users);
+    return toUserDocumentLike(updated);
+  }
+
   toSafeUser(user: User): SafeUser {
     const anyUser = user as any;
     return {
       _id: String(anyUser._id ?? anyUser.id ?? ''),
       email: String(anyUser.email ?? ''),
       username: anyUser.username ? String(anyUser.username) : undefined,
+      avatar: anyUser.avatar ? String(anyUser.avatar) : undefined,
     };
   }
 }
-

@@ -14,4 +14,17 @@ export class UsersController {
   async login(@Body() body: any) {
     return this.usersService.login(body);
   }
+
+  @Post('avatar')
+  async updateAvatar(@Body() body: any) {
+    return this.usersService.updateAvatar({
+      userId: String(body?.userId ?? ''),
+      avatar:
+        typeof body?.avatar === 'string'
+          ? (body.avatar as string)
+          : body?.avatar === null
+            ? null
+            : null,
+    });
+  }
 }

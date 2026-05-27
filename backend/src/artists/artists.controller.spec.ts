@@ -11,7 +11,7 @@ describe('ArtistsController', () => {
       providers: [
         {
           provide: ArtistsService,
-          useValue: {}, 
+          useValue: {},
         },
       ],
     }).compile();
