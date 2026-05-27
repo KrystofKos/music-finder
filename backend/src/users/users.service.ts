@@ -18,10 +18,8 @@ export class UsersService {
       throw new ConflictException('Email already exists');
     }
 
-    // 2. Vygenerujeme "sůl" (náhodný klíč pro zesílení šifry)
     const salt = await bcrypt.genSalt(10);
 
-    // 3. Zahashujeme heslo
     const hashedPassword = await bcrypt.hash(userData.password, salt);
 
     const saved = await this.usersRepo.create({

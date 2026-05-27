@@ -5,21 +5,20 @@ import { UsersService } from './users.service';
 import { User, UserSchema } from './users.schema';
 import { USERS_REPO } from './users.repo';
 import { MongoUsersRepo } from './mongo-users.repo';
-import { FileUsersRepo } from './file-users.repo';
 
+// users.module.ts
 @Module({
   imports: [
-    ...(process.env.MONGO_URI
-      ? [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])]
-      : []),
+    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  controllers: [UsersController], // Přidat sem
+  controllers: [UsersController],
   providers: [
     UsersService,
     {
       provide: USERS_REPO,
-      useClass: process.env.MONGO_URI ? MongoUsersRepo : FileUsersRepo,
+      useClass: MongoUsersRepo, 
     },
-  ], // Přidat sem
+  ],
+  exports: [UsersService],
 })
 export class UsersModule {}
