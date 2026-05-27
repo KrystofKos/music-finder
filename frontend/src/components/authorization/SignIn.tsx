@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/auth";
 import { ApiError } from "../../api/http";
 import { saveUser } from "../../auth/session";
+import { useLanguage } from "../../i18n/LanguageContext";
 import "./SignIn.css";
 
 export default function SignIn() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const close = () => navigate("/");
 
   const [email, setEmail] = useState("");
@@ -25,7 +27,7 @@ export default function SignIn() {
       if (err instanceof ApiError) {
         setError(`API error ${err.status}`);
       } else {
-        setError("Wrong email or password");
+        setError(t("auth.wrongCredentials"));
       }
     } finally {
       setIsSubmitting(false);
@@ -38,19 +40,19 @@ export default function SignIn() {
         <button
           type="button"
           className="CloseButton"
-          aria-label="Close sign in"
+          aria-label={t("auth.closeSignIn")}
           onClick={close}
         >
           ×
         </button>
-        <h2>Sign In</h2>
+        <h2>{t("auth.signIn")}</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             void submit();
           }}
         >
-          <h3>E-mail</h3>
+          <h3>{t("auth.email")}</h3>
           <input
             type="email"
             className="authorization_input"
@@ -59,7 +61,7 @@ export default function SignIn() {
             autoComplete="email"
             required
           />
-          <h3>Password</h3>
+          <h3>{t("auth.password")}</h3>
           <input
             type="password"
             className="authorization_input"
@@ -73,13 +75,13 @@ export default function SignIn() {
             className="authorization_button"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Signing in..." : "Sign In"}
+            {isSubmitting ? t("auth.signingIn") : t("auth.signIn")}
           </button>
           {error ? <p className="authError">{error}</p> : null}
           <p>
-            Don't have an account?{" "}
+            {t("auth.noAccount")}{" "}
             <Link to="/signup">
-              <span>Sign Up</span>
+              <span>{t("auth.signUp")}</span>
             </Link>
           </p>
         </form>

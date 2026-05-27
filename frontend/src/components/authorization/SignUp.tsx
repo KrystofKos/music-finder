@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { register } from "../../api/auth";
 import { ApiError } from "../../api/http";
 import { saveUser } from "../../auth/session";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const close = () => navigate("/");
 
   const [email, setEmail] = useState("");
@@ -19,7 +21,7 @@ export default function SignUp() {
   const submit = async () => {
     setError(null);
     if (password !== repeatPassword) {
-      setError("Passwords do not match");
+      setError(t("auth.passwordsNoMatch"));
       return;
     }
 
@@ -32,7 +34,7 @@ export default function SignUp() {
       if (err instanceof ApiError) {
         setError(`API error ${err.status}`);
       } else {
-        setError("Registration failed. Try another email.");
+        setError(t("auth.registrationFailed"));
       }
     } finally {
       setIsSubmitting(false);
@@ -45,19 +47,19 @@ export default function SignUp() {
         <button
           type="button"
           className="CloseButton"
-          aria-label="Close sign up"
+          aria-label={t("auth.closeSignUp")}
           onClick={close}
         >
           ×
         </button>
-        <h2>Sign Up</h2>
+        <h2>{t("auth.signUp")}</h2>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             void submit();
           }}
         >
-          <h3>E-mail</h3>
+          <h3>{t("auth.email")}</h3>
           <input
             type="email"
             className="authorization_input"
@@ -66,7 +68,7 @@ export default function SignUp() {
             autoComplete="email"
             required
           />
-          <h3>Name</h3>
+          <h3>{t("auth.name")}</h3>
           <input
             type="text"
             className="authorization_input"
@@ -75,7 +77,7 @@ export default function SignUp() {
             autoComplete="username"
             required
           />
-          <h3>Password</h3>
+          <h3>{t("auth.password")}</h3>
           <input
             type="password"
             className="authorization_input"
@@ -84,7 +86,7 @@ export default function SignUp() {
             autoComplete="new-password"
             required
           />
-          <h3>Repeat password</h3>
+          <h3>{t("auth.repeatPassword")}</h3>
           <input
             type="password"
             className="authorization_input"
@@ -98,13 +100,13 @@ export default function SignUp() {
             className="authorization_button"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Signing up..." : "Sign Up"}
+            {isSubmitting ? t("auth.signingUp") : t("auth.signUp")}
           </button>
           {error ? <p className="authError">{error}</p> : null}
           <p>
-            Already have an account?{" "}
+            {t("auth.hasAccount")}{" "}
             <Link to="/signin">
-              <span>Sign In</span>
+              <span>{t("auth.signIn")}</span>
             </Link>
           </p>
         </form>

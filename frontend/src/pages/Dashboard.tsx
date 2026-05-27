@@ -10,6 +10,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { getDashboardTopTracks } from "../api/dashboard";
 import type { Track } from "../api/tracks";
 import { usePlayback } from "../playback/PlaybackContext";
+import { useLanguage } from "../i18n/LanguageContext";
 
 import exampleImage from "../pages/dashboard-images/exampleimage.webp";
 import pop from "../pages/dashboard-images/pop.jfif";
@@ -25,6 +26,7 @@ import "./Dashboard.css";
 
 const Dashboard = () => {
   const { currentTrack, isPlaying, setIsPlaying, playTrack } = usePlayback();
+  const { t } = useLanguage();
   const [topTracks, setTopTracks] = useState<Track[]>([]);
   const [loadingTop, setLoadingTop] = useState(false);
 
@@ -39,7 +41,7 @@ const Dashboard = () => {
   const playlists = [
     {
       id: 1,
-      title: "Cool Ass Playlist",
+      title: t("dashboard.coolPlaylist"),
       image: exampleImage,
     },
     {
@@ -91,16 +93,16 @@ const Dashboard = () => {
 
   const songs = useMemo(
     () =>
-      topTracks.map((t) => ({
-        id: t.id,
-        artist: t.artist?.name ?? "Unknown artist",
-        song: t.title,
-        duration: `${Math.floor((t.duration ?? 0) / 60)}:${String(
-          (t.duration ?? 0) % 60,
+      topTracks.map((track) => ({
+        id: track.id,
+        artist: track.artist?.name ?? t("common.unknownArtist"),
+        song: track.title,
+        duration: `${Math.floor((track.duration ?? 0) / 60)}:${String(
+          (track.duration ?? 0) % 60,
         ).padStart(2, "0")}`,
-        track: t,
+        track,
       })),
-    [topTracks],
+    [topTracks, t],
   );
 
   const scroll = (dir: "left" | "right") => {
@@ -143,12 +145,12 @@ const Dashboard = () => {
         <div className="title">
           <div className="title-left">
             <BsMusicNote className="title-icon" />
-            <h2>Discover Genre</h2>
+            <h2>{t("dashboard.discoverGenre")}</h2>
           </div>
 
           <div className="title-right">
             <button className="returnButton" onClick={() => navigate("/")}>
-              <FaArrowLeftLong />  Back
+              <FaArrowLeftLong /> {t("common.back")}
             </button>
           </div>
         </div>
@@ -196,7 +198,7 @@ const Dashboard = () => {
         <div className="title">
           <div className="title-left">
             <TfiHeadphone className="title-icon" />
-            <h2>Top Music</h2>
+            <h2>{t("dashboard.topMusic")}</h2>
           </div>
 
           <div className="title-right">
@@ -205,13 +207,13 @@ const Dashboard = () => {
               className="returnButton"
               onClick={() => navigate("/topmusic")}
             >
-              Show More...
+              {t("common.showMore")}
             </button>
           </div>
         </div>
 
         <div className="top-music-list">
-          {loadingTop ? <p style={{ margin: 0 }}>Loading...</p> : null}
+          {loadingTop ? <p style={{ margin: 0 }}>{t("common.loading")}</p> : null}
           {songs.map((song, i) => (
             <div className="song-box" key={song.id}>
               <h1 className="chart-position">#{i + 1}</h1>

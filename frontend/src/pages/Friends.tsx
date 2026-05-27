@@ -1,7 +1,11 @@
+import { useLanguage } from "../i18n/LanguageContext";
+
 export default function Friends() {
+    const { t } = useLanguage();
+
     return (
         <div>
-            Friends
+            {t("pages.friends")}
         </div>
     )
 }

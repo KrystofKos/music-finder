@@ -6,8 +6,8 @@
   min-height: 520px;
   overflow: hidden;
 
-  background: #0d0d0d;
-  color: white;
+  background: var(--surface);
+  color: var(--text-strong);
 
   font-family: Arial, Helvetica, sans-serif;
 
@@ -30,9 +30,9 @@
   display: flex;
   flex-direction: column;
 
-  background: #141414;
+  background: var(--surface-alt);
 
-  border-right: 1px solid #232323;
+  border-right: 1px solid var(--line);
 
   overflow: hidden;
   transition:
@@ -44,7 +44,7 @@
 .SidebarHeader {
   padding: 20px;
 
-  border-bottom: 1px solid #232323;
+  border-bottom: 1px solid var(--line);
 }
 
 .Title {
@@ -64,7 +64,7 @@
 }
 
 .ConversationList::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: var(--surface-hover);
   border-radius: 999px;
 }
 
@@ -74,10 +74,10 @@
   padding: 16px;
 
   border: none;
-  border-bottom: 1px solid #232323;
+  border-bottom: 1px solid var(--line);
 
   background: transparent;
-  color: white;
+  color: var(--text-strong);
 
   text-align: left;
 
@@ -87,7 +87,7 @@
 }
 
 .Conversation:hover {
-  background: #1b1b1b;
+  background: var(--surface-hover);
 }
 
 .ConversationContent {
@@ -113,7 +113,7 @@
 .ConversationLastMessage {
   margin-top: 5px;
 
-  color: #9a9a9a;
+  color: var(--muted);
 
   white-space: nowrap;
   overflow: hidden;
@@ -126,7 +126,7 @@
 
   border-radius: 50%;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 
   display: flex;
   justify-content: center;
@@ -149,9 +149,9 @@
 
   padding: 20px;
 
-  border-bottom: 1px solid #232323;
+  border-bottom: 1px solid var(--line);
 
-  background: #141414;
+  background: var(--surface-alt);
 
   display: flex;
   justify-content: space-between;
@@ -166,8 +166,8 @@
   border: none;
   border-radius: 999px;
 
-  background: #1e1e1e;
-  color: #ffffff;
+  background: var(--surface-raised);
+  color: var(--text-strong);
 
   cursor: pointer;
 
@@ -181,7 +181,7 @@
 }
 
 .ConversationsToggleButton:hover {
-  background: #2a2a2a;
+  background: var(--surface-hover);
   transform: translateY(-1px);
 }
 
@@ -204,9 +204,9 @@
   border: none;
   border-radius: 999px;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 
-  color: #ffffff;
+  color: var(--text-strong);
 
   cursor: pointer;
 
@@ -242,7 +242,7 @@
 }
 
 .MessageList::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: var(--surface-hover);
   border-radius: 999px;
 }
 
@@ -259,7 +259,7 @@
 .Message {
   max-width: 70%;
 
-  background: #1e1e1e;
+  background: var(--surface-raised);
 
   padding: 12px 16px;
 
@@ -269,7 +269,7 @@
 .MessageOwn {
   max-width: 70%;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 
   padding: 12px 16px;
 
@@ -297,9 +297,9 @@
 
   padding: 18px;
 
-  border-top: 1px solid #232323;
+  border-top: 1px solid var(--line);
 
-  background: #141414;
+  background: var(--surface-alt);
 
   display: flex;
   gap: 12px;
@@ -318,8 +318,8 @@
 
   padding: 14px 16px;
 
-  background: #1e1e1e;
-  color: white;
+  background: var(--surface-raised);
+  color: var(--text-strong);
 
   outline: none;
 
@@ -328,7 +328,7 @@
 }
 
 .Textarea::placeholder {
-  color: #8a8a8a;
+  color: var(--muted);
 }
 
 .SendButton {
@@ -337,9 +337,9 @@
   border: none;
   border-radius: 18px;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 
-  color: white;
+  color: var(--on-accent);
 
   cursor: pointer;
 
@@ -402,3 +402,4 @@
     min-width: 80px;
   }
 }
+

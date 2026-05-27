@@ -4,10 +4,10 @@
   top: 0;
   width: 348px;
   height: 100vh;
-  background-color: #111111;
-  color: #bfe0d1;
+  background-color: var(--surface-alt);
+  color: var(--text);
   padding: 20px;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: -2px 0 5px var(--shadow);
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
@@ -40,18 +40,18 @@
 .user-header-text h2 {
   margin: 0;
   font-size: 1.25rem;
-  color: #ffffff;
+  color: var(--text-strong);
 }
 
 .user-header-text p {
   margin: 4px 0 0;
-  color: #ffffff;
+  color: var(--text-strong);
   font-size: 0.9rem;
 }
 
 .user-header-bell {
   margin-left: auto;
-  color: #c7d8c5;
+  color: var(--muted-strong);
   width: 28px;
   height: 28px;
   cursor: pointer;
@@ -79,7 +79,7 @@
 
 .artist-info-text h3 {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-strong);
 }
 
 .recent-list .artist-info-left {
@@ -106,7 +106,7 @@
 
 .recent-time {
   margin: 0;
-  color: #c7d8c5;
+  color: var(--muted-strong);
   font-size: 0.82rem;
   line-height: 24px;
   white-space: nowrap;
@@ -115,7 +115,7 @@
 
 .recent-icon {
   display: block;
-  color: #c7d8c5;
+  color: var(--muted-strong);
   width: 24px;
   height: 24px;
   flex-shrink: 0;
@@ -141,7 +141,7 @@
 }
 
 .artist-info p {
-  color: #c7d8c5;
+  color: var(--muted-strong);
   font-size: 0.92rem;
 }
 
@@ -155,7 +155,7 @@
 }
 
 .dots-icon {
-  color: #c7d8c5;
+  color: var(--muted-strong);
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -172,11 +172,11 @@
 
 .right-side-panel h2 {
   margin-top: 0;
-  color: #d1d1d1;
+  color: var(--text);
 }
 
 .right-side-panel .user-header-text h2 {
-  color: #ffffff;
+  color: var(--text-strong);
 }
 
 .right-side-panel ul {
@@ -200,22 +200,23 @@
 }
 
 .section-scroll::-webkit-scrollbar-track {
-  background: rgba(162, 115, 205, 0.12);
+  background: color-mix(in oklab, var(--accent-soft) 20%, transparent);
   border-radius: 10px;
 }
 
 .section-scroll::-webkit-scrollbar-thumb {
-  background: rgba(162, 115, 205, 0.5);
+  background: color-mix(in oklab, var(--accent) 50%, transparent);
   border-radius: 10px;
 }
 
 .section-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(162, 115, 205, 0.7);
+  background: color-mix(in oklab, var(--accent) 70%, transparent);
 }
 
 .section-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(162, 115, 205, 0.5) rgba(162, 115, 205, 0.12);
+  scrollbar-color: color-mix(in oklab, var(--accent) 50%, transparent)
+    color-mix(in oklab, var(--accent-soft) 20%, transparent);
 }
 
 .top-artist-scroll {
@@ -230,7 +231,7 @@
   margin-bottom: 12px;
   padding: 14px 18px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
+  background: color-mix(in oklab, var(--surface-hover) 55%, transparent);
 }
 
 .right-side-panel ul li:last-child {
@@ -262,7 +263,7 @@
 
 .right-side-panel ul li p {
   margin: 4px 0 0;
-  color: #c7d8c5;
+  color: var(--muted-strong);
   font-size: 12px;
 }
 

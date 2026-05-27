@@ -1,7 +1,11 @@
+import { useLanguage } from "../i18n/LanguageContext";
+
 export default function MobileApp() {
+    const { t } = useLanguage();
+
     return (
         <div>
-            Mobile App
+            {t("pages.mobileApp")}
         </div>
     )
 }

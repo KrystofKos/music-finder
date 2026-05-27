@@ -1,7 +1,7 @@
 .dashboard {
-  background: #0d0d0d;
+  background: var(--surface);
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
+  color: var(--text-strong);
   padding: 20px;
   border-radius: 18px;
 }
@@ -25,7 +25,7 @@
 
 .title-icon {
   font-size: 1.8rem;
-  color: #b5179e;
+  color: var(--accent);
 }
 
 .returnButton {
@@ -36,9 +36,9 @@
   border: none;
   border-radius: 999px;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 
-  color: #ffffff;
+  color: var(--on-accent);
 
   cursor: pointer;
 
@@ -73,12 +73,12 @@
 
 .carousel-wrapper::before {
   left: 0;
-  background: linear-gradient(to right, #0d0d0d, transparent);
+  background: linear-gradient(to right, var(--surface), transparent);
 }
 
 .carousel-wrapper::after {
   right: 0;
-  background: linear-gradient(to left, #0d0d0d, transparent);
+  background: linear-gradient(to left, var(--surface), transparent);
 }
 
 .carousel-buttons {
@@ -104,8 +104,8 @@
   border: none;
   border-radius: 50%;
 
-  background: rgba(181, 23, 158, 0.9);
-  color: white;
+  background: color-mix(in oklab, var(--accent) 90%, transparent);
+  color: var(--on-accent);
 
   display: flex;
   align-items: center;
@@ -142,7 +142,7 @@
   width: 170px;
   flex: 0 0 auto;
 
-  background: #161616;
+  background: var(--surface-raised);
   border-radius: 20px;
   padding: 16px;
 
@@ -151,7 +151,7 @@
 
 .playlist-box:hover {
   transform: translateY(-5px);
-  background: #1d1d1d;
+  background: var(--surface-hover);
   cursor: pointer;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .playlist-title {
-  color: white;
+  color: var(--text-strong);
 }
 
 .top-music .title {
@@ -184,7 +184,7 @@
   align-items: center;
   gap: 18px;
   max-height: 50px;
-  background: #1e1e1e;
+  background: var(--surface-raised);
   border-radius: 18px;
   padding: 6px;
 
@@ -192,7 +192,7 @@
 }
 
 .song-box:hover {
-  background: #2c2c2c;
+  background: var(--surface-hover);
 }
 
 .song-box h1 {
@@ -209,7 +209,7 @@
 
   border-radius: 50%;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
+  background: var(--accent-gradient);
 }
 
 .artist-n-song {
@@ -217,7 +217,7 @@
 }
 
 .duration {
-  color: #a0a0a0;
+  color: var(--muted);
 }
 
 .pause-button {
@@ -227,8 +227,8 @@
   border-radius: 50%;
   border: none;
 
-  background: linear-gradient(135deg, #b5179e, #7209b7);
-  color: white;
+  background: var(--accent-gradient);
+  color: var(--on-accent);
 
   display: flex;
   align-items: center;

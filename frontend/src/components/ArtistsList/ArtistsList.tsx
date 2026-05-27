@@ -1,5 +1,6 @@
 import type { Artist } from "../../api/artists";
 import "./ArtistsList.css";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 type Props = {
   artists: Artist[];
@@ -7,16 +8,14 @@ type Props = {
 };
 
 export default function ArtistsList({ artists, query }: Props) {
+  const { t } = useLanguage();
+
   if (!query.trim()) {
-    return (
-      <div className="ArtistsList-empty">
-        Type something to search artists.
-      </div>
-    );
+    return <div className="ArtistsList-empty">{t("search.typeArtists")}</div>;
   }
 
   if (artists.length === 0) {
-    return <div className="ArtistsList-empty">No artists found.</div>;
+    return <div className="ArtistsList-empty">{t("search.noArtists")}</div>;
   }
 
   return (
@@ -39,7 +38,9 @@ export default function ArtistsList({ artists, query }: Props) {
 
             {artist.bestTrack ? (
               <div className="ArtistCard-track">
-                <span className="ArtistCard-trackLabel">Top track:</span>{" "}
+                <span className="ArtistCard-trackLabel">
+                  {t("search.topTrack")}
+                </span>{" "}
                 <span className="ArtistCard-trackTitle">
                   {artist.bestTrack.title}
                 </span>
@@ -54,7 +55,7 @@ export default function ArtistsList({ artists, query }: Props) {
               </div>
             ) : (
               <div className="ArtistCard-track ArtistCard-trackMuted">
-                No top track preview.
+                {t("search.noTopTrack")}
               </div>
             )}
           </div>

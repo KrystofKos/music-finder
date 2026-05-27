@@ -1,6 +1,6 @@
 .Header {
   grid-area: header;
-  background-color: #60519b;
+  background-color: var(--accent-strong);
   padding: 20px;
   text-align: center;
   display: flex;
@@ -21,18 +21,18 @@
 .signupButton {
   margin-top: 12px;
   padding: 8px 14px;
-  border: 1.5px solid #000;
+  border: 1.5px solid var(--button-text);
   border-radius: 999px;
-  background: #b0a2e7;
-  color: #000000;
+  background: var(--accent-soft);
+  color: var(--button-text);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .signinButton:hover,
 .signupButton:hover {
-  background: #1e202c;
-  color: #bfc0d1;
+  background: var(--bg);
+  color: var(--text);
 }
 
 @media (max-width: 600px) {

@@ -2,8 +2,8 @@
   grid-area: sidepanel;
   height: 100vh;
   padding: 16px;
-  background: #121212;
-  color: #bfc0d1;
+  background: var(--surface-alt);
+  color: var(--text);
 
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@
 .Sidepanel-Help {
   padding: 10px;
   border-bottom: 2px solid;
-  border-image: linear-gradient(135deg, #b5179e, #7209b7) 1;
+  border-image: var(--accent-gradient) 1;
   margin-bottom: 10px;
 }
 
@@ -31,7 +31,7 @@
 .Header-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #ffffff;
+  color: var(--text-strong);
 }
 
 .Header-logo {
@@ -46,7 +46,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #a7a7a7;
+  color: var(--muted);
 }
 
 .Sidepanel-List,
@@ -65,23 +65,23 @@
   border-radius: 10px;
   cursor: pointer;
   transition: 0.2s ease;
-  color: #bfc0d1;
+  color: var(--text);
 }
 
 .Sidepanel-List-Item:hover {
-  background: #2a2a2a;
-  color: #fff;
+  background: var(--surface-hover);
+  color: var(--text-strong);
   transform: translateX(3px);
 }
 
 .Sidepanel-List-Item.active {
-  background: linear-gradient(135deg, #b5179e, #7209b7);
-  color: #fff;
+  background: var(--accent-gradient);
+  color: var(--on-accent);
 }
 
 .Sidepanel-List-Item.active:hover {
-  background: linear-gradient(135deg, #b5179e, #7209b7);
-  color: #fff;
+  background: var(--accent-gradient);
+  color: var(--on-accent);
   transform: none;
 }
 
@@ -100,13 +100,13 @@
 }
 
 .Sidepanel-List::-webkit-scrollbar-thumb {
-  background: #2a2a2a;
+  background: var(--surface-hover);
   border-radius: 10px;
 }
 
 .Sidepanel-List-Item:hover {
-  background: #2a2a2a;
-  color: #ffffff;
+  background: var(--surface-hover);
+  color: var(--text-strong);
 }
 
 .Sidepanel-Help {

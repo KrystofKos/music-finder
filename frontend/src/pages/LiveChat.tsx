@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../api/http";
 import { getUser } from "../auth/session";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./LiveChat.css";
 
 type Conversation = {
@@ -31,64 +32,6 @@ type BackendConversation = Partial<Conversation> & {
 
 type BackendMessage = Partial<Message> & {
   _id?: string;
-};
-
-const fallbackConversations: Conversation[] = [
-  {
-    id: "general",
-    name: "General",
-    lastMessage: "Share tracks, albums, and listening notes.",
-    unread: 2,
-  },
-  {
-    id: "discoveries",
-    name: "Discoveries",
-    lastMessage: "Found anything good today?",
-    unread: 0,
-  },
-  {
-    id: "support",
-    name: "Support",
-    lastMessage: "Ask for help with Music Finder.",
-    unread: 1,
-  },
-];
-
-const fallbackMessages: Record<string, Message[]> = {
-  general: [
-    {
-      id: "general-1",
-      conversationId: "general",
-      content: "Welcome to the Music Finder live chat.",
-      senderId: "system",
-      createdAt: new Date(Date.now() - 1000 * 60 * 22).toISOString(),
-    },
-    {
-      id: "general-2",
-      conversationId: "general",
-      content: "Drop a song recommendation and keep the queue alive.",
-      senderId: "system",
-      createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-    },
-  ],
-  discoveries: [
-    {
-      id: "discoveries-1",
-      conversationId: "discoveries",
-      content: "This room is ready for new finds.",
-      senderId: "system",
-      createdAt: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
-    },
-  ],
-  support: [
-    {
-      id: "support-1",
-      conversationId: "support",
-      content: "Tell us what is not working and we will help.",
-      senderId: "system",
-      createdAt: new Date(Date.now() - 1000 * 60 * 48).toISOString(),
-    },
-  ],
 };
 
 const READ_RECEIPTS_KEY = "mf_live_chat_read_receipts";
@@ -119,10 +62,13 @@ function applyReadReceipts(
   );
 }
 
-function normalizeConversation(item: BackendConversation): Conversation {
+function normalizeConversation(
+  item: BackendConversation,
+  fallbackName: string,
+): Conversation {
   return {
     id: String(item.id ?? item._id ?? crypto.randomUUID()),
-    name: item.name ?? "Conversation",
+    name: item.name ?? fallbackName,
     lastMessage: item.lastMessage ?? "",
     unread: item.unread ?? 0,
   };
@@ -150,10 +96,75 @@ function formatTime(value: string) {
 
 const LiveChat = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const currentUser = getUser();
   const currentUserId = currentUser?._id ?? "guest";
   const currentUserName =
-    currentUser?.username ?? currentUser?.email ?? "Guest";
+    currentUser?.username ?? currentUser?.email ?? t("common.guest");
+
+  const fallbackConversations = useMemo<Conversation[]>(
+    () => [
+      {
+        id: "general",
+        name: t("liveChat.general"),
+        lastMessage: t("liveChat.generalLastMessage"),
+        unread: 2,
+      },
+      {
+        id: "discoveries",
+        name: t("liveChat.discoveries"),
+        lastMessage: t("liveChat.discoveriesLastMessage"),
+        unread: 0,
+      },
+      {
+        id: "support",
+        name: t("liveChat.support"),
+        lastMessage: t("liveChat.supportLastMessage"),
+        unread: 1,
+      },
+    ],
+    [t],
+  );
+
+  const fallbackMessages = useMemo<Record<string, Message[]>>(
+    () => ({
+      general: [
+        {
+          id: "general-1",
+          conversationId: "general",
+          content: t("liveChat.welcome"),
+          senderId: "system",
+          createdAt: new Date(Date.now() - 1000 * 60 * 22).toISOString(),
+        },
+        {
+          id: "general-2",
+          conversationId: "general",
+          content: t("liveChat.recommendation"),
+          senderId: "system",
+          createdAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
+        },
+      ],
+      discoveries: [
+        {
+          id: "discoveries-1",
+          conversationId: "discoveries",
+          content: t("liveChat.readyForFinds"),
+          senderId: "system",
+          createdAt: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
+        },
+      ],
+      support: [
+        {
+          id: "support-1",
+          conversationId: "support",
+          content: t("liveChat.supportHelp"),
+          senderId: "system",
+          createdAt: new Date(Date.now() - 1000 * 60 * 48).toISOString(),
+        },
+      ],
+    }),
+    [t],
+  );
 
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConversationId, setSelectedConversationId] = useState("");
@@ -192,7 +203,9 @@ const LiveChat = () => {
           "/live-chat/conversations",
           { signal: controller.signal },
         );
-        const normalized = result.map(normalizeConversation);
+        const normalized = result.map((conversation) =>
+          normalizeConversation(conversation, t("liveChat.conversation")),
+        );
         const firstConversationId = normalized[0]?.id ?? "";
         const nextReceipts =
           firstConversationId && normalized[0]
@@ -247,7 +260,7 @@ const LiveChat = () => {
     loadConversations();
 
     return () => controller.abort();
-  }, []);
+  }, [fallbackConversations, fallbackMessages, t]);
 
   function markConversationAsRead(conversationId: string) {
     const conversation = conversations.find(
@@ -302,7 +315,7 @@ const LiveChat = () => {
     loadMessages();
 
     return () => controller.abort();
-  }, [messages, selectedConversation]);
+  }, [fallbackMessages, messages, selectedConversation]);
 
   useEffect(() => {
     messageListRef.current?.scrollTo({
@@ -406,7 +419,7 @@ const LiveChat = () => {
     >
       <aside className="Sidebar">
         <div className="SidebarHeader">
-          <h1 className="Title">Live Chat</h1>
+          <h1 className="Title">{t("liveChat.title")}</h1>
         </div>
 
         <div className="ConversationList">
@@ -414,7 +427,9 @@ const LiveChat = () => {
             <button className="Conversation" type="button" disabled>
               <div className="ConversationContent">
                 <div className="ConversationInfo">
-                  <h2 className="ConversationName">Loading chats...</h2>
+                  <h2 className="ConversationName">
+                    {t("liveChat.loadingChats")}
+                  </h2>
                 </div>
               </div>
             </button>
@@ -434,7 +449,7 @@ const LiveChat = () => {
                 <div className="ConversationInfo">
                   <h2 className="ConversationName">{conversation.name}</h2>
                   <p className="ConversationLastMessage">
-                    {conversation.lastMessage || "No messages yet"}
+                    {conversation.lastMessage || t("liveChat.noMessages")}
                   </p>
                 </div>
 
@@ -457,20 +472,20 @@ const LiveChat = () => {
             onClick={() => setConversationsCollapsed((current) => !current)}
             aria-label={
               conversationsCollapsed
-                ? "Show conversations"
-                : "Hide conversations"
+                ? t("liveChat.showConversations")
+                : t("liveChat.hideConversations")
             }
             title={
               conversationsCollapsed
-                ? "Show conversations"
-                : "Hide conversations"
+                ? t("liveChat.showConversations")
+                : t("liveChat.hideConversations")
             }
           >
             {conversationsCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
           </button>
 
           <h2 className="ChatTitle">
-            {selectedConversation?.name ?? "Select a chat"}
+            {selectedConversation?.name ?? t("liveChat.selectChat")}
           </h2>
 
           <button
@@ -478,13 +493,13 @@ const LiveChat = () => {
             type="button"
             onClick={() => navigate("/")}
           >
-            <FaArrowLeftLong /> Back
+            <FaArrowLeftLong /> {t("common.back")}
           </button>
         </header>
 
         <div className="MessageList" ref={messageListRef}>
           {loadingMessages ? (
-            <p className="MessageContent">Loading...</p>
+            <p className="MessageContent">{t("common.loading")}</p>
           ) : null}
 
           {activeMessages.map((message) => {
@@ -511,8 +526,8 @@ const LiveChat = () => {
             className="Textarea"
             placeholder={
               selectedConversation
-                ? "Type your message..."
-                : "Select a chat first..."
+                ? t("liveChat.typeMessage")
+                : t("liveChat.selectChatFirst")
             }
             value={messageText}
             onChange={(event) => setMessageText(event.target.value)}
@@ -525,7 +540,7 @@ const LiveChat = () => {
             type="submit"
             disabled={!messageText.trim() || !selectedConversation || sending}
           >
-            {sending ? "Sending" : "Send"}
+            {sending ? t("liveChat.sending") : t("liveChat.send")}
           </button>
         </form>
       </div>

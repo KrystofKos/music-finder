@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--overlay);
   z-index: 9909;
   display: flex;
   justify-content: center;
@@ -13,12 +13,12 @@
 
 .SignIn {
   position: relative;
-  background:#1e202c;
+  background: var(--bg);
   padding: 20px;
   border-radius: 15px;
   max-width: 500px;
   width: 100%;
-  color: #bfe0d1;
+  color: var(--text);
   min-height: 300px;
   text-align: center;
   margin: 0 auto 15px auto;
@@ -32,7 +32,7 @@
   height: 34px;
   border: none;
   background: transparent;
-  color: #bfe0d1;
+  color: var(--text);
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
@@ -40,7 +40,7 @@
 }
 
 .CloseButton:hover {
-  color: #ffffff;
+  color: var(--text-strong);
   transform: scale(1.05);
 }
 
@@ -48,7 +48,7 @@
     min-height: 35px;
     border-radius: 10px;
     min-width: 250px;
-    background-color: white;
+    background-color: var(--input-bg);
     margin: 0 auto 20px auto;
     display: block;
     margin-left: auto;
@@ -63,29 +63,29 @@
     height: 40px;
     text-align: center;
     margin: 15px auto 0 auto;
-    background-color: #31323e;
-    background: #b0a2e7;
-    color: #000000;
+    background-color: var(--panel);
+    background: var(--accent-soft);
+    color: var(--button-text);
     transition: all 0.3s ease;
     cursor: pointer;
-    border: 1.5px solid #000 ;
+    border: 1.5px solid var(--button-text);
   }
 
   .authorization_button:hover {
-   background-color: #60519b;
-   border-color: #60519b;
-   color: #ffffff;
+   background-color: var(--accent-strong);
+   border-color: var(--accent-strong);
+   color: var(--on-accent);
 }
 
   .SignIn span{
-    color:#bfe0d1;
+    color: var(--text);
     text-decoration: underline;
     cursor: pointer;
   }
 
 .authError {
   margin: 10px 0 0 0;
-  color: #ffb4b4;
+  color: var(--danger);
   font-size: 0.95rem;
 }
 
