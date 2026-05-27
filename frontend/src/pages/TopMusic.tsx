@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BsPlayCircleFill } from "react-icons/bs";
+
 import { FaArrowLeftLong } from "react-icons/fa6";
 import type { Track } from "../api/tracks";
 import { getDashboardTopTracksPage } from "../api/dashboard";
@@ -117,7 +119,10 @@ export default function TopMusic() {
                   </span>
                 )}
                 {track.album?.title ? (
-                  <span className="TrackCard-album"> • {track.album.title}</span>
+                  <span className="TrackCard-album">
+                    {" "}
+                    • {track.album.title}
+                  </span>
                 ) : null}
               </div>
 
@@ -127,6 +132,7 @@ export default function TopMusic() {
                   className="TrackCard-play"
                   onClick={() => playTrack(track)}
                 >
+                  <BsPlayCircleFill />
                   <span>{t("common.playInPlayer")}</span>
                 </button>
               ) : (

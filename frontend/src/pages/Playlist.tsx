@@ -1,29 +1,37 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { BsPlayCircleFill } from "react-icons/bs";
+
 import type { Track } from "../api/tracks";
 import {
   getDashboardPlaylists,
   getDashboardPlaylistTracksPage,
 } from "../api/dashboard";
+
 import { usePlayback } from "../playback/PlaybackContext";
 import { useLanguage } from "../i18n/LanguageContext";
+
 import "../components/TracksList/TracksList.css";
 
 export default function Playlist() {
   const navigate = useNavigate();
   const { id } = useParams();
+
   const playlistId = Number(id);
 
   const { playFromQueue } = usePlayback();
   const { t } = useLanguage();
 
   const [title, setTitle] = useState<string>(t("playlist.title"));
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [pageIndex, setPageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
+
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   const pageSize = 10;
@@ -32,20 +40,22 @@ export default function Playlist() {
 
   useEffect(() => {
     if (!valid) return;
+
     const controller = new AbortController();
+
     getDashboardPlaylists(controller.signal)
       .then((pls) => {
         const found = pls.find((p) => p.id === playlistId);
+
         setTitle(found?.title ?? t("playlist.title"));
       })
-      .catch(() => {
-        // ignore: keep default title
-      });
-    return () => controller.abort();
+      .catch(() => {})
+      .finally(() => controller.abort());
   }, [playlistId, t, valid]);
 
   useEffect(() => {
     if (!valid) return;
+
     setTracks([]);
     setHasMore(true);
     setPageIndex(0);
@@ -58,8 +68,10 @@ export default function Playlist() {
     if (loading || !hasMore) return;
 
     const controller = new AbortController();
+
     setLoading(true);
     setError(null);
+
     getDashboardPlaylistTracksPage(
       playlistId,
       pageSize,
@@ -68,8 +80,11 @@ export default function Playlist() {
     )
       .then((next) => {
         const filtered = next.filter((t) => !trackIds.has(t.id));
+
         setTracks((prev) => [...prev, ...filtered]);
+
         setPageIndex((p) => p + 1);
+
         setHasMore(next.length === pageSize);
       })
       .catch(() => setError(t("playlist.loadError")))
@@ -79,27 +94,37 @@ export default function Playlist() {
   useEffect(() => {
     if (!valid) return;
     loadMore();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valid, playlistId]);
 
   useEffect(() => {
     const el = loaderRef.current;
+
     if (!el) return;
 
     const obs = new IntersectionObserver(
       (entries) => {
         const first = entries[0];
-        if (first?.isIntersecting) loadMore();
+
+        if (first?.isIntersecting) {
+          loadMore();
+        }
       },
       { rootMargin: "600px" },
     );
 
     obs.observe(el);
+
     return () => obs.disconnect();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, hasMore, pageIndex, trackIds, valid, playlistId]);
 
-  const canPlay = useMemo(() => tracks.some((t) => Boolean(t.preview)), [tracks]);
+  const canPlay = useMemo(
+    () => tracks.some((t) => Boolean(t.preview)),
+    [tracks],
+  );
 
   if (!valid) {
     return (
@@ -112,23 +137,41 @@ export default function Playlist() {
 
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <h1 style={{ margin: 0 }}>{title}</h1>
-        <button className="returnButton" onClick={() => navigate("/dashboard")}>
-          <FaArrowLeftLong /> {t("common.back")}
-        </button>
-        {canPlay ? (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 12,
+        }}
+      >
+        <div className="headerLeft">
+          <h1 style={{ margin: 0 }}>{title}</h1>
+        </div>
+        <div className="headerRight">
           <button
-            style={{ marginLeft: "auto" }}
-            className="authorization_button"
-            onClick={() => playFromQueue(tracks, 0)}
+            className="returnButton"
+            onClick={() => navigate("/dashboard")}
           >
-            {t("playlist.playAll")}
+            <FaArrowLeftLong />
+            {t("common.back")}
           </button>
-        ) : null}
+
+          {canPlay ? (
+            <button
+              style={{ marginLeft: "auto" }}
+              className="returnButton"
+              onClick={() => playFromQueue(tracks, 0)}
+            >
+              <BsPlayCircleFill />
+              {t("playlist.playAll")}
+            </button>
+          ) : null}
+        </div>
       </div>
 
       {loading ? <p style={{ marginTop: 10 }}>{t("common.loading")}</p> : null}
+
       {error ? <p style={{ marginTop: 10 }}>{error}</p> : null}
 
       <div className="TracksList">
@@ -139,6 +182,7 @@ export default function Playlist() {
               src={track.album?.cover ?? track.artist?.picture ?? ""}
               alt={track.album?.title ?? track.artist?.name ?? track.title}
             />
+
             <div className="TrackCard-body">
               <div className="TrackCard-titleRow">
                 <a
@@ -166,8 +210,12 @@ export default function Playlist() {
                     {t("common.unknownArtist")}
                   </span>
                 )}
+
                 {track.album?.title ? (
-                  <span className="TrackCard-album"> • {track.album.title}</span>
+                  <span className="TrackCard-album">
+                    {" "}
+                    • {track.album.title}
+                  </span>
                 ) : null}
               </div>
 
@@ -177,6 +225,7 @@ export default function Playlist() {
                   className="TrackCard-play"
                   onClick={() => playFromQueue(tracks, index)}
                 >
+                  <BsPlayCircleFill />
                   <span>{t("common.playInPlayer")}</span>
                 </button>
               ) : (
@@ -188,9 +237,11 @@ export default function Playlist() {
       </div>
 
       <div ref={loaderRef} style={{ height: 1 }} />
+
       {loading && tracks.length > 0 ? (
         <p style={{ marginTop: 10 }}>{t("common.loadingMore")}</p>
       ) : null}
+
       {!hasMore && tracks.length > 0 ? (
         <p style={{ marginTop: 10, opacity: 0.7 }}>
           {t("common.noMoreTracks")}

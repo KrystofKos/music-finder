@@ -1,7 +1,6 @@
 import { CiBellOn } from "react-icons/ci";
 import { VscTriangleRight } from "react-icons/vsc";
-import {HiOutlineDotsVertical } from "react-icons/hi";
-import Images from "../../../images/TemplateImages.png";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 import "./RightSidePanel.css";
 import { usePlayback } from "../../playback/PlaybackContext";
 import { getUser, onUserChange } from "../../auth/session";
@@ -17,6 +16,31 @@ function formatAgo(msAgo: number, t: ReturnType<typeof useLanguage>["t"]) {
   if (hours < 24) return t("rightPanel.hoursAgo", { count: hours });
   const days = Math.floor(hours / 24);
   return t("rightPanel.daysAgo", { count: days });
+}
+
+function Avatar({ src, name }: { src?: string; name: string }) {
+  if (src) {
+    return <img src={src} alt={name} />;
+  }
+
+  return (
+    <div
+      style={{
+        width: 48,
+        height: 48,
+        borderRadius: "50%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "var(--surface-alt)",
+        color: "var(--text-strong)",
+        fontWeight: 700,
+        flexShrink: 0,
+      }}
+    >
+      {name?.charAt(0)?.toUpperCase() ?? "?"}
+    </div>
+  );
 }
 
 export default function RightSidePanel() {
@@ -56,17 +80,19 @@ export default function RightSidePanel() {
   return (
     <div className="right-side-panel">
       <div className="user-header">
-        <img
-          src={user?.avatar ?? Images}
-          alt={user?.username ?? user?.email ?? t("common.guest")}
-          className="user-header-img"
-        />
+        <div className="user-header-img">
+          <Avatar
+            src={user?.avatar}
+            name={user?.username ?? user?.email ?? t("common.guest")}
+          />
+        </div>
         <div className="user-header-text">
           <h2>{user?.username ?? t("common.guest")}</h2>
           <p>{user?.email ?? t("common.notSignedIn")}</p>
         </div>
         <CiBellOn className="user-header-bell" />
       </div>
+
       <h2>{t("rightPanel.topArtist")}</h2>
       <div className="section-scroll top-artist-scroll">
         <ul>
@@ -86,7 +112,7 @@ export default function RightSidePanel() {
               <li key={a.id}>
                 <div className="artist-info">
                   <div className="artist-info-left">
-                    <img src={a.picture ?? Images} alt={a.name} />
+                    <Avatar src={a.picture} name={a.name} />
                     <div className="artist-info-text">
                       <h3>{a.name}</h3>
                       <p>{t("rightPanel.plays", { count: a.plays })}</p>
@@ -99,8 +125,9 @@ export default function RightSidePanel() {
               </li>
             ))
           )}
-      </ul>
+        </ul>
       </div>
+
       <h2>{t("rightPanel.recentlyPlayed")}</h2>
       <div className="section-scroll recent-played-scroll">
         <ul className="recent-list">
@@ -120,13 +147,17 @@ export default function RightSidePanel() {
               <li key={item.track.id}>
                 <div className="artist-info">
                   <div className="artist-info-left">
-                    <img
-                      src={item.track.album?.cover ?? item.track.artist?.picture ?? Images}
-                      alt={item.track.title}
+                    <Avatar
+                      src={
+                        item.track.album?.cover ?? item.track.artist?.picture
+                      }
+                      name={item.track.artist?.name ?? item.track.title}
                     />
                     <div className="artist-info-text">
                       <h3>{item.track.title}</h3>
-                      <p>{item.track.artist?.name ?? t("common.unknownArtist")}</p>
+                      <p>
+                        {item.track.artist?.name ?? t("common.unknownArtist")}
+                      </p>
                     </div>
                   </div>
                   <div className="recent-meta">
@@ -147,7 +178,7 @@ export default function RightSidePanel() {
               </li>
             ))
           )}
-      </ul>
+        </ul>
       </div>
     </div>
   );

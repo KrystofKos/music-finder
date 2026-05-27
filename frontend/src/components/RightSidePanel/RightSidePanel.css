@@ -17,10 +17,14 @@
   height: 58px;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .right-side-panel ul {
-  
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
 }
 
 .user-header {
@@ -35,6 +39,7 @@
   height: 48px;
   object-fit: cover;
   border-radius: 50%;
+  display: block;
 }
 
 .user-header-text h2 {
@@ -65,6 +70,7 @@
   max-width: 280px;
   height: 58px;
   min-width: 0;
+  overflow: hidden;
 }
 
 .artist-info-left {
@@ -73,18 +79,23 @@
   gap: 12px;
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .artist-info-text {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  overflow: hidden;
 }
 
 .artist-info-text h3 {
   margin: 0;
   color: var(--text-strong);
   min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .recent-list .artist-info-left {
@@ -159,6 +170,9 @@
 .artist-info p {
   color: var(--muted-strong);
   font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .artist-info-right {
@@ -195,12 +209,6 @@
   color: var(--text-strong);
 }
 
-.right-side-panel ul {
-  margin: 16px 0;
-  padding: 0;
-  list-style: none;
-}
-
 .section-scroll {
   max-height: 220px;
   overflow-y: auto;
@@ -209,6 +217,7 @@
   margin-bottom: 18px;
   width: 100%;
   box-sizing: border-box;
+  scrollbar-width: thin;
 }
 
 .section-scroll::-webkit-scrollbar {
@@ -229,12 +238,6 @@
   background: color-mix(in oklab, var(--accent) 70%, transparent);
 }
 
-.section-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--accent) 50%, transparent)
-    color-mix(in oklab, var(--accent-soft) 20%, transparent);
-}
-
 .top-artist-scroll {
   max-height: 240px;
 }
@@ -248,6 +251,8 @@
   padding: 14px 18px;
   border-radius: 14px;
   background: color-mix(in oklab, var(--surface-hover) 55%, transparent);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .right-side-panel ul li:last-child {
@@ -259,6 +264,8 @@
   align-items: center;
   gap: 12px;
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .right-side-panel ul li img {
@@ -267,20 +274,29 @@
   object-fit: cover;
   border-radius: 12px;
   flex-shrink: 0;
+  display: block;
 }
 
 .right-side-panel ul li div > div {
   min-width: 0;
+  overflow: hidden;
 }
 
 .right-side-panel h3 {
   font-size: 16px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .right-side-panel ul li p {
   margin: 4px 0 0;
   color: var(--muted-strong);
   font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .right-side-panel .section {

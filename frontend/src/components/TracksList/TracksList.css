@@ -1,3 +1,8 @@
+.headerRight {
+  display: flex;
+  justify-content: center;
+}
+
 .TracksList {
   margin-top: 16px;
   display: grid;
@@ -49,6 +54,8 @@
 
 .TrackCard-body {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .TrackCard-titleRow {
@@ -99,19 +106,21 @@
 }
 
 .TrackCard-play {
-  margin-top: 10px;
-  width: fit-content;
-  max-width: 100%;
+  margin-top: auto;
+  align-self: flex-start;
+
   border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
-  background: color-mix(in oklab, var(--panel) 65%, var(--surface));
+  background: transparent;
   color: var(--text);
-  border-radius: 999px;
-  padding: 8px 12px;
+  border-radius: 12px;
+  padding: 8px 10px;
   cursor: pointer;
+
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  font-weight: 700;
+
   transition:
     transform 0.15s ease,
     border-color 0.15s ease,
@@ -129,9 +138,8 @@
   opacity: 0.9;
 }
 
-.TrackCard-play > svg {
-  flex: 0 0 auto;
-  font-size: 20px;
+.TrackCard-play svg {
+  font-size: 18px;
   color: var(--accent);
 }
 
