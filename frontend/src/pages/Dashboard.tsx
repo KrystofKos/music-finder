@@ -5,12 +5,17 @@ import { FaPlay, FaPause } from "react-icons/fa";
 import { BiSolidRightArrow } from "react-icons/bi";
 import { BiSolidLeftArrow } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeftLong } from "react-icons/fa6";
 
 import { getDashboardTopTracks } from "../api/dashboard";
 import type { Track } from "../api/tracks";
+import { getArtists, type Artist } from "../api/artists";
+import { getTracks } from "../api/tracks";
+import { ApiError } from "../api/http";
 import { usePlayback } from "../playback/PlaybackContext";
 import { useLanguage } from "../i18n/LanguageContext";
+import SearchBar from "../components/SearchBar/SearchBar";
+import TracksList from "../components/TracksList/TracksList";
+import ArtistsList from "../components/ArtistsList/ArtistsList";
 
 import exampleImage from "../pages/dashboard-images/exampleimage.webp";
 import pop from "../pages/dashboard-images/pop.jfif";
@@ -29,6 +34,11 @@ const Dashboard = () => {
   const { t } = useLanguage();
   const [topTracks, setTopTracks] = useState<Track[]>([]);
   const [loadingTop, setLoadingTop] = useState(false);
+  const [query, setQuery] = useState("");
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [loadingSearch, setLoadingSearch] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
@@ -91,6 +101,74 @@ const Dashboard = () => {
     return () => controller.abort();
   }, []);
 
+  useEffect(() => {
+    const trimmed = query.trim();
+
+    if (!trimmed) {
+      setArtists([]);
+      setTracks([]);
+      setLoadingSearch(false);
+      setSearchError(null);
+      return;
+    }
+
+    const controller = new AbortController();
+
+    const timeout = window.setTimeout(async () => {
+      try {
+        setLoadingSearch(true);
+        setSearchError(null);
+
+        const [artistsResult, tracksResult] = await Promise.allSettled([
+          getArtists(trimmed, controller.signal),
+          getTracks(trimmed, controller.signal),
+        ]);
+
+        setArtists(
+          artistsResult.status === "fulfilled" ? artistsResult.value : [],
+        );
+        setTracks(tracksResult.status === "fulfilled" ? tracksResult.value : []);
+
+        if (
+          artistsResult.status === "rejected" ||
+          tracksResult.status === "rejected"
+        ) {
+          const err =
+            (artistsResult.status === "rejected" ? artistsResult.reason : null) ??
+            (tracksResult.status === "rejected" ? tracksResult.reason : null);
+
+          if (err instanceof ApiError) {
+            setSearchError(t("search.apiError", { status: err.status }));
+          } else if (err instanceof Error) {
+            setSearchError(err.message);
+          } else {
+            setSearchError(t("search.failed"));
+          }
+        }
+      } catch (err) {
+        if (!(err instanceof DOMException && err.name === "AbortError")) {
+          if (err instanceof ApiError) {
+            setSearchError(t("search.apiError", { status: err.status }));
+          } else if (err instanceof Error) {
+            setSearchError(err.message);
+          } else {
+            setSearchError(t("search.unknownError"));
+          }
+
+          setArtists([]);
+          setTracks([]);
+        }
+      } finally {
+        setLoadingSearch(false);
+      }
+    }, 250);
+
+    return () => {
+      controller.abort();
+      window.clearTimeout(timeout);
+    };
+  }, [query, t]);
+
   const songs = useMemo(
     () =>
       topTracks.map((track) => ({
@@ -141,17 +219,38 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
+      <div className="dashboard-search">
+        <div className="dashboard-searchCard">
+          <div className="title">
+            <div className="title-left">
+              <BsMusicNote className="title-icon" />
+              <h2>{t("dashboard.search")}</h2>
+            </div>
+          </div>
+
+          <SearchBar
+            query={query}
+            onQueryChange={setQuery}
+            foundCount={artists.length + tracks.length}
+            loading={loadingSearch}
+          />
+
+          {searchError ? (
+            <p className="dashboard-searchError">{searchError}</p>
+          ) : null}
+        </div>
+
+        <div className="dashboard-searchResults">
+          <TracksList tracks={tracks} query={query} />
+          <ArtistsList artists={artists} query={query} />
+        </div>
+      </div>
+
       <div className="discover-genre">
         <div className="title">
           <div className="title-left">
             <BsMusicNote className="title-icon" />
             <h2>{t("dashboard.discoverGenre")}</h2>
-          </div>
-
-          <div className="title-right">
-            <button className="returnButton" onClick={() => navigate("/")}>
-              <FaArrowLeftLong /> {t("common.back")}
-            </button>
           </div>
         </div>
 

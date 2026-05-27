@@ -43,6 +43,7 @@ export const translations = {
     "dashboard.discoverGenre": "Discover Genre",
     "dashboard.topMusic": "Top Music",
     "dashboard.coolPlaylist": "Cool Ass Playlist",
+    "dashboard.search": "Search",
 
     "favorite.title": "Favorite",
     "favorite.signInMessage": "Sign in to see your favorites.",
@@ -146,6 +147,9 @@ export const translations = {
     "search.typeTracks": "Type something to search tracks.",
     "search.unexpected": "Unexpected response.",
     "search.noTracks": "No tracks found.",
+    "search.failed": "Search failed.",
+    "search.unknownError": "Unknown error.",
+    "search.apiError": "API error {status}",
 
     "rightPanel.topArtist": "Top Artist",
     "rightPanel.noData": "No data yet",
@@ -218,6 +222,7 @@ export const translations = {
     "dashboard.discoverGenre": "Objevovat žánry",
     "dashboard.topMusic": "Top hudba",
     "dashboard.coolPlaylist": "Super playlist",
+    "dashboard.search": "Hledat",
 
     "favorite.title": "Oblíbené",
     "favorite.signInMessage": "Pro zobrazení oblíbených se přihlaste.",
@@ -321,6 +326,9 @@ export const translations = {
     "search.typeTracks": "Zadejte text pro hledání skladeb.",
     "search.unexpected": "Neočekávaná odpověď.",
     "search.noTracks": "Žádné skladby nenalezeny.",
+    "search.failed": "Vyhledávání se nezdařilo.",
+    "search.unknownError": "Neznámá chyba.",
+    "search.apiError": "Chyba API {status}",
 
     "rightPanel.topArtist": "Top interpret",
     "rightPanel.noData": "Zatím žádná data",
@@ -477,6 +485,9 @@ export const translations = {
     "search.found": "Найдено {count}",
     "search.noArtists": "Исполнители не найдены.",
     "search.noTracks": "Треки не найдены.",
+    "search.failed": "Поиск не удался.",
+    "search.unknownError": "Неизвестная ошибка.",
+    "search.apiError": "Ошибка API {status}",
 
     "rightPanel.topArtist": "Топ исполнитель",
     "rightPanel.recentlyPlayed": "Недавно прослушано",
