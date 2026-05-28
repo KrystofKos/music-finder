@@ -25,11 +25,7 @@ export default function SearchBar({
         value={query}
         onChange={(e) => onQueryChange(e.target.value)}
       />
-      <p className="ArtistCount">
-        {loading
-          ? t("search.searching")
-          : t("search.found", { count: foundCount })}
-      </p>
+    
     </div>
   );
 }

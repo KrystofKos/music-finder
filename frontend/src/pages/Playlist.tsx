@@ -99,7 +99,10 @@ export default function Playlist() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, hasMore, pageIndex, trackIds, valid, playlistId]);
 
-  const canPlay = useMemo(() => tracks.some((t) => Boolean(t.preview)), [tracks]);
+  const canPlay = useMemo(
+    () => tracks.some((t) => Boolean(t.preview)),
+    [tracks],
+  );
 
   if (!valid) {
     return (
@@ -117,15 +120,6 @@ export default function Playlist() {
         <button className="returnButton" onClick={() => navigate("/dashboard")}>
           <FaArrowLeftLong /> {t("common.back")}
         </button>
-        {canPlay ? (
-          <button
-            style={{ marginLeft: "auto" }}
-            className="authorization_button"
-            onClick={() => playFromQueue(tracks, 0)}
-          >
-            {t("playlist.playAll")}
-          </button>
-        ) : null}
       </div>
 
       {loading ? <p style={{ marginTop: 10 }}>{t("common.loading")}</p> : null}
@@ -167,7 +161,10 @@ export default function Playlist() {
                   </span>
                 )}
                 {track.album?.title ? (
-                  <span className="TrackCard-album"> • {track.album.title}</span>
+                  <span className="TrackCard-album">
+                    {" "}
+                    • {track.album.title}
+                  </span>
                 ) : null}
               </div>
 

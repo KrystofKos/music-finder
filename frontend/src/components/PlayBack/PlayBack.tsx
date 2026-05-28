@@ -16,6 +16,7 @@ import {
 } from "react-icons/bs";
 import { usePlayback } from "../../playback/PlaybackContext";
 import { useLanguage } from "../../i18n/LanguageContext";
+import { FaDove } from "react-icons/fa";
 
 export default function PlayBack() {
   const { t } = useLanguage();
