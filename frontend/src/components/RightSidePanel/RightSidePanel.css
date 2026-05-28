@@ -179,10 +179,7 @@
 
 @media (max-width: 960px) {
   .right-side-panel {
-    position: static;
-    width: 100%;
-    height: auto;
-    box-shadow: none;
+    display: none;
   }
 }
 
